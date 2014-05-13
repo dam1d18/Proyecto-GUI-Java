@@ -3001,6 +3001,156 @@ public class PokemonGUI extends JFrame {
         PokemonGUI.labelsaludIA.setText((int) Juego.equipoIA[pokemonencombateIA].salud + "/" + (int) Juego.equipoIA[pokemonencombateIA].saludmax);
     }
 
+    public static void SubirBarraJugadorPocoAPoco() {
+        double saludantesgolpe;
+        saludantesgolpe = Juego.equipojugador[PokemonGUI.pokemonencombatejugador].saludantesgolpe;
+
+        double porcentaje = saludantesgolpe / Juego.equipojugador[PokemonGUI.pokemonencombatejugador].saludmax;
+        if ((porcentaje * 100) > 50) {
+            PokemonGUI.saludjugador.setBackground(Color.green);
+            saludequipojugador[pokemonencombatejugador].setBackground(Color.green);
+
+        } else if ((porcentaje * 100) > 20) {
+            PokemonGUI.saludjugador.setBackground(Color.yellow);
+            saludequipojugador[pokemonencombatejugador].setBackground(Color.yellow);
+
+        } else {
+            PokemonGUI.saludjugador.setBackground(Color.red);
+            saludequipojugador[pokemonencombatejugador].setBackground(Color.red);
+
+        }
+        int anchobarra;
+        if ((340 * porcentaje) <= (Juego.equipojugador[PokemonGUI.pokemonencombatejugador].saludmax / 340) && (340 * porcentaje) > 0) {
+            anchobarra = 1;
+        } else {
+            anchobarra = (int) (340 * porcentaje);
+        }
+        PokemonGUI.labelsaludjugador.setText((int) Juego.equipojugador[pokemonencombatejugador].salud + "/" + (int) Juego.equipojugador[pokemonencombatejugador].saludmax);
+        PokemonGUI.saludjugador.setBounds(60, 40, anchobarra, 40);
+        if ((97 * porcentaje) <= (Juego.equipojugador[PokemonGUI.pokemonencombatejugador].saludmax / 97) && (97 * porcentaje) > 0) {
+            anchobarra = 1;
+        } else {
+            anchobarra = (int) (97 * porcentaje);
+        }
+        saludequipojugador[pokemonencombatejugador].setBounds(135, 70, anchobarra, 7);
+        for (int i = (int) saludantesgolpe; i <= Juego.equipojugador[PokemonGUI.pokemonencombatejugador].salud; i++) {
+            porcentaje = i / Juego.equipojugador[PokemonGUI.pokemonencombatejugador].saludmax;
+            if ((porcentaje * 100) > 50) {
+                PokemonGUI.saludjugador.setBackground(Color.green);
+                saludequipojugador[pokemonencombatejugador].setBackground(Color.green);
+            } else if ((porcentaje * 100) > 20) {
+                PokemonGUI.saludjugador.setBackground(Color.yellow);
+                saludequipojugador[pokemonencombatejugador].setBackground(Color.yellow);
+            } else {
+                PokemonGUI.saludjugador.setBackground(Color.red);
+                saludequipojugador[pokemonencombatejugador].setBackground(Color.red);
+            }
+            if ((340 * porcentaje) <= (Juego.equipojugador[PokemonGUI.pokemonencombatejugador].saludmax / 340) && (340 * porcentaje) > 0) {
+                anchobarra = 1;
+            } else {
+                anchobarra = (int) (340 * porcentaje);
+            }
+            PokemonGUI.labelsaludjugador.setText(i + "/" + (int) Juego.equipojugador[pokemonencombatejugador].saludmax);
+            PokemonGUI.saludjugador.setBounds(60, 40, anchobarra, 40);
+            if ((97 * porcentaje) <= (Juego.equipojugador[PokemonGUI.pokemonencombatejugador].saludmax / 97) && (97 * porcentaje) > 0) {
+                anchobarra = 1;
+            } else {
+                anchobarra = (int) (97 * porcentaje);
+            }
+            saludequipojugador[pokemonencombatejugador].setBounds(135, 70, anchobarra, 7);
+            lblsaludequipojugador[pokemonencombatejugador].setText(i + "/" + (int) Juego.equipojugador[pokemonencombatejugador].saludmax);
+            try {
+                Thread.sleep(tiempo);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println(i);
+        }
+        PokemonGUI.labelsaludjugador.setText((int) Juego.equipojugador[pokemonencombatejugador].salud + "/" + (int) Juego.equipojugador[pokemonencombatejugador].saludmax);
+        if (Juego.equipojugador[pokemonencombatejugador].salud <= 0) {
+            Juego.equipojugador[pokemonencombatejugador].salud = 0;
+            botonpokemonelegidosJugador[pokemonencombatejugador].setEnabled(false);
+        }
+    }
+
+    public static void SubirBarraIAPocoAPoco() {
+        double saludgolpe;
+        double porcentaje;
+        int anchobarra;
+        saludgolpe = Juego.equipoIA[PokemonGUI.pokemonencombateIA].saludantesgolpe;
+
+        porcentaje = saludgolpe / Juego.equipoIA[PokemonGUI.pokemonencombateIA].saludmax;
+        System.out.println(saludgolpe);
+        if (saludgolpe <= 0) {
+            saludgolpe = 0;
+        }
+        if ((porcentaje * 100) > 50) {
+            PokemonGUI.saludIA.setBackground(Color.green);
+            saludequipoIA[pokemonencombateIA].setBackground(Color.green);
+
+        } else if ((porcentaje * 100) > 20) {
+            PokemonGUI.saludIA.setBackground(Color.yellow);
+            saludequipoIA[pokemonencombateIA].setBackground(Color.yellow);
+        } else {
+            PokemonGUI.saludIA.setBackground(Color.red);
+            saludequipoIA[pokemonencombateIA].setBackground(Color.red);
+        }
+        if ((340 * porcentaje) <= (Juego.equipoIA[PokemonGUI.pokemonencombateIA].saludmax / 340) && (340 * porcentaje) > 0) {
+            anchobarra = 1;
+        } else {
+            anchobarra = (int) (340 * porcentaje);
+        }
+        PokemonGUI.labelsaludIA.setText((int) saludgolpe + "/" + (int) Juego.equipoIA[pokemonencombateIA].saludmax);
+        PokemonGUI.saludIA.setBounds(60, 40, anchobarra, 40);
+
+        if ((97 * porcentaje) <= (Juego.equipoIA[PokemonGUI.pokemonencombateIA].saludmax / 97) && (97 * porcentaje) > 0) {
+            anchobarra = 1;
+        } else {
+            anchobarra = (int) (97 * porcentaje);
+        }
+        saludequipoIA[pokemonencombateIA].setBounds(135, 70, anchobarra, 7);
+
+        for (int i = (int) saludgolpe; i <= Juego.equipoIA[PokemonGUI.pokemonencombateIA].salud; i--) {
+            porcentaje = i / Juego.equipoIA[PokemonGUI.pokemonencombateIA].saludmax;
+            if ((porcentaje * 100) > 50) {
+                PokemonGUI.saludIA.setBackground(Color.green);
+                saludequipoIA[pokemonencombateIA].setBackground(Color.green);
+            } else if ((porcentaje * 100) > 20) {
+                PokemonGUI.saludIA.setBackground(Color.yellow);
+                saludequipoIA[pokemonencombateIA].setBackground(Color.yellow);
+            } else {
+                PokemonGUI.saludIA.setBackground(Color.red);
+                saludequipoIA[pokemonencombateIA].setBackground(Color.red);
+            }
+            if ((340 * porcentaje) <= (Juego.equipoIA[PokemonGUI.pokemonencombateIA].saludmax / 340) && (340 * porcentaje) > 0) {
+                anchobarra = 1;
+            } else {
+                anchobarra = (int) (340 * porcentaje);
+            }
+            PokemonGUI.labelsaludIA.setText(i + "/" + (int) Juego.equipoIA[pokemonencombateIA].saludmax);
+            PokemonGUI.saludIA.setBounds(60, 40, anchobarra, 40);
+
+            if ((97 * porcentaje) <= (Juego.equipoIA[PokemonGUI.pokemonencombateIA].saludmax / 97) && (97 * porcentaje) > 0) {
+                anchobarra = 1;
+            } else {
+                anchobarra = (int) (97 * porcentaje);
+            }
+            try {
+                Thread.sleep(tiempo);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            saludequipoIA[pokemonencombateIA].setBounds(135, 70, anchobarra, 7);
+            lblsaludequipoIA[pokemonencombateIA].setText(i + "/" + (int) Juego.equipoIA[pokemonencombateIA].saludmax);
+            System.out.println(i);
+        }
+        if (Juego.equipoIA[pokemonencombateIA].salud <= 0) {
+            botonpokemonelegidosIA[pokemonencombateIA].setEnabled(false);
+            Juego.equipoIA[pokemonencombateIA].salud = 0;
+        }
+        PokemonGUI.labelsaludIA.setText((int) Juego.equipoIA[pokemonencombateIA].salud + "/" + (int) Juego.equipoIA[pokemonencombateIA].saludmax);
+    }
+
     public static class BarraDeVidaJugador implements Runnable {
 
         public void run() {
@@ -3026,6 +3176,10 @@ public class PokemonGUI extends JFrame {
                 equipoIA[pokemonencombateIA].noatacar = false;
             }
             ataquejugador[pokemonencombatejugador][ataqueusadojugador] = ataquejugador[pokemonencombatejugador][ataqueusadojugador].DevolverAtaqueMetronomo(ataquejugador[pokemonencombatejugador][ataqueusadojugador]);
+            if (equipoIA[pokemonencombateIA].salud > equipoIA[pokemonencombateIA].saludantesgolpe) {
+                SubirBarraIAPocoAPoco();
+                equipoIA[pokemonencombateIA].saludantesgolpe = equipoIA[pokemonencombateIA].salud;
+            }
             BajarBarraIAPocoAPoco(true);
             equipoIA[pokemonencombateIA].saludantesgolpe = equipoIA[pokemonencombateIA].salud;
             BajarBarraJugadorPocoAPoco(false);
@@ -3068,6 +3222,10 @@ public class PokemonGUI extends JFrame {
                 equipojugador[pokemonencombatejugador].noatacar = false;
             }
             ataquejugador[pokemonencombatejugador][ataqueusadojugador] = ataquejugador[pokemonencombatejugador][ataqueusadojugador].DevolverAtaqueMetronomo(ataquejugador[pokemonencombatejugador][ataqueusadojugador]);
+            if (equipojugador[pokemonencombatejugador].salud > equipojugador[pokemonencombatejugador].saludantesgolpe) {
+                SubirBarraJugadorPocoAPoco();
+                equipojugador[pokemonencombatejugador].saludantesgolpe = equipojugador[pokemonencombatejugador].salud;
+            }
             BajarBarraJugadorPocoAPoco(true);
             BajarBarraIAPocoAPoco(false);
             try {
@@ -3122,6 +3280,10 @@ public class PokemonGUI extends JFrame {
                 equipojugador[pokemonencombatejugador].noatacar = false;
             }
             ataqueIA[pokemonencombateIA][ataqueusadoIA] = ataqueIA[pokemonencombateIA][ataqueusadoIA].DevolverAtaqueMetronomo(ataqueIA[pokemonencombateIA][ataqueusadoIA]);
+            if (equipojugador[pokemonencombatejugador].salud > equipojugador[pokemonencombatejugador].saludantesgolpe) {
+                SubirBarraJugadorPocoAPoco();
+                equipojugador[pokemonencombatejugador].saludantesgolpe = equipojugador[pokemonencombatejugador].salud;
+            }
             BajarBarraJugadorPocoAPoco(true);
             equipojugador[pokemonencombatejugador].saludantesgolpe = equipojugador[pokemonencombatejugador].salud;
             BajarBarraIAPocoAPoco(false);
@@ -3163,9 +3325,12 @@ public class PokemonGUI extends JFrame {
                 equipoIA[pokemonencombateIA].noatacar = false;
             }
             ataqueIA[pokemonencombateIA][ataqueusadoIA] = ataqueIA[pokemonencombateIA][ataqueusadoIA].DevolverAtaqueMetronomo(ataqueIA[pokemonencombateIA][ataqueusadoIA]);
+            if (equipoIA[pokemonencombateIA].salud > equipoIA[pokemonencombateIA].saludantesgolpe) {
+                SubirBarraIAPocoAPoco();
+                equipoIA[pokemonencombateIA].saludantesgolpe = equipoIA[pokemonencombateIA].salud;
+            }
             BajarBarraIAPocoAPoco(true);
             BajarBarraJugadorPocoAPoco(false);
-
 
             try {
                 ComprobacionesDespuesAtacar();

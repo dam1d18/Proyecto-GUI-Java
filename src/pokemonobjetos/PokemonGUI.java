@@ -3074,15 +3074,15 @@ public class PokemonGUI extends JFrame {
     }
 
     public static void SubirBarraIAPocoAPoco() {
-        double saludgolpe;
+        double saludantesgolpe;
         double porcentaje;
         int anchobarra;
-        saludgolpe = Juego.equipoIA[PokemonGUI.pokemonencombateIA].saludantesgolpe;
+        saludantesgolpe = Juego.equipoIA[PokemonGUI.pokemonencombateIA].saludantesgolpe;
 
-        porcentaje = saludgolpe / Juego.equipoIA[PokemonGUI.pokemonencombateIA].saludmax;
-        System.out.println(saludgolpe);
-        if (saludgolpe <= 0) {
-            saludgolpe = 0;
+        porcentaje = saludantesgolpe / Juego.equipoIA[PokemonGUI.pokemonencombateIA].saludmax;
+        System.out.println(saludantesgolpe);
+        if (saludantesgolpe <= 0) {
+            saludantesgolpe = 0;
         }
         if ((porcentaje * 100) > 50) {
             PokemonGUI.saludIA.setBackground(Color.green);
@@ -3100,7 +3100,7 @@ public class PokemonGUI extends JFrame {
         } else {
             anchobarra = (int) (340 * porcentaje);
         }
-        PokemonGUI.labelsaludIA.setText((int) saludgolpe + "/" + (int) Juego.equipoIA[pokemonencombateIA].saludmax);
+        PokemonGUI.labelsaludIA.setText((int) saludantesgolpe + "/" + (int) Juego.equipoIA[pokemonencombateIA].saludmax);
         PokemonGUI.saludIA.setBounds(60, 40, anchobarra, 40);
 
         if ((97 * porcentaje) <= (Juego.equipoIA[PokemonGUI.pokemonencombateIA].saludmax / 97) && (97 * porcentaje) > 0) {
@@ -3110,7 +3110,7 @@ public class PokemonGUI extends JFrame {
         }
         saludequipoIA[pokemonencombateIA].setBounds(135, 70, anchobarra, 7);
 
-        for (int i = (int) saludgolpe; i <= Juego.equipoIA[PokemonGUI.pokemonencombateIA].salud; i--) {
+        for (int i = (int) saludantesgolpe; i <= Juego.equipoIA[PokemonGUI.pokemonencombateIA].salud; i++) {
             porcentaje = i / Juego.equipoIA[PokemonGUI.pokemonencombateIA].saludmax;
             if ((porcentaje * 100) > 50) {
                 PokemonGUI.saludIA.setBackground(Color.green);

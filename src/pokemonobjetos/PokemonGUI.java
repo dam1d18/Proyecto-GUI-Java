@@ -62,7 +62,7 @@ public class PokemonGUI extends JFrame {
     public static int ataqueusadojugador, ataqueusadoIA;
     public static int ronda = 1;
     public static int probabilidadshiny = 15;
-    public static int tiempo = 2;
+    public static int tiempo = 4;
     public static boolean modocarrera, kanto = false, johto = false, hoenn = false, sinnoh = false, teselia = false,
             listeneratacar = false, iniciocombate = true;
     public static int entrenadorliga = 1;
@@ -1884,6 +1884,7 @@ public class PokemonGUI extends JFrame {
                                     if (!iniciocombate) {
                                         equipojugador[pokemonencombatejugador].DevolverEstadisticasBase(equipojugador[pokemonencombatejugador], equipoIA[pokemonencombateIA], ataquejugador[pokemonencombatejugador]);
                                     }
+                                    Pokemon.activarsolounboton = false;
                                     iniciocombate = false;
                                     setCursor(cursormenus);
                                     PokemonGUI.panelestadojugador.setVisible(true);
@@ -2781,7 +2782,7 @@ public class PokemonGUI extends JFrame {
     public static void RefrescoVidaJugador() {
         if (Juego.equipojugador[PokemonGUI.pokemonencombatejugador].salud == Juego.equipojugador[PokemonGUI.pokemonencombatejugador].saludmax) {
             PokemonGUI.saludjugador.setBackground(Color.green);
-            saludequipoIA[pokemonencombateIA].setBackground(Color.green);
+            saludequipojugador[pokemonencombatejugador].setBackground(Color.green);
             PokemonGUI.labelsaludjugador.setText((int) Juego.equipojugador[PokemonGUI.pokemonencombatejugador].salud + "/" + (int) Juego.equipojugador[pokemonencombatejugador].saludmax);
             PokemonGUI.saludjugador.setBounds(60, 40, 340, 40);
         } else {
@@ -3185,7 +3186,7 @@ public class PokemonGUI extends JFrame {
             BajarBarraJugadorPocoAPoco(false);
             Mensajes.setText(str);
             MostrarEstado();
-            if (!PokemonGUI.atacaiaporcambiarpokemonjugador && equipoIA[pokemonencombateIA].Vivo()) {
+            if (!PokemonGUI.atacaiaporcambiarpokemonjugador && equipojugador[pokemonencombatejugador].Vivo() && equipoIA[pokemonencombateIA].Vivo()) {
                 ataquejugador[pokemonencombatejugador][ataqueusadojugador] = ataquejugador[pokemonencombatejugador][ataqueusadojugador].Metronomo(ataquejugador[pokemonencombatejugador][ataqueusadojugador]);
                 str += equipojugador[pokemonencombatejugador].nombre + " usó " + ataquejugador[pokemonencombatejugador][ataqueusadojugador].nombre + ".\r\n";
                 PokemonGUI.Mensajes.setText(str);
@@ -3228,6 +3229,7 @@ public class PokemonGUI extends JFrame {
             }
             BajarBarraJugadorPocoAPoco(true);
             BajarBarraIAPocoAPoco(false);
+            PokemonGUI.Mensajes.setText(str);
             try {
                 ComprobacionesDespuesAtacar();
             } catch (IOException ex) {
@@ -3290,7 +3292,7 @@ public class PokemonGUI extends JFrame {
 
             PokemonGUI.Mensajes.setText(str);
             MostrarEstado();
-            if (equipojugador[pokemonencombatejugador].Vivo()) {
+            if (equipojugador[pokemonencombatejugador].Vivo() && equipoIA[pokemonencombateIA].Vivo()) {
                 ataqueIA[pokemonencombateIA][ataqueusadoIA] = ataqueIA[pokemonencombateIA][ataqueusadoIA].Metronomo(ataqueIA[pokemonencombateIA][ataqueusadoIA]);
                 str += equipoIA[pokemonencombateIA].nombre + " usó " + ataqueIA[pokemonencombateIA][ataqueusadoIA].nombre + ".\r\n";
                 PokemonGUI.Mensajes.setText(str);
@@ -3331,6 +3333,7 @@ public class PokemonGUI extends JFrame {
             }
             BajarBarraIAPocoAPoco(true);
             BajarBarraJugadorPocoAPoco(false);
+            PokemonGUI.Mensajes.setText(str);
 
             try {
                 ComprobacionesDespuesAtacar();

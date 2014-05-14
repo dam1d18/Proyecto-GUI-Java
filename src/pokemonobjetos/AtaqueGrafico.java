@@ -92,8 +92,8 @@ public class AtaqueGrafico {
             case "Rayo":
                 if (p.equijugador) {
                     equijugador = true;
-                    x = 220;
-                    y = 210;
+                    x = 210;
+                    y = 220;
                     ancho = 50;
                     alto = 50;
                     movy = false;
@@ -105,6 +105,8 @@ public class AtaqueGrafico {
                     alto = 50;
                     movx = false;
                 }
+                break;
+            default:
                 break;
         }
         dibujo = ObtenerImagen(a);
@@ -212,7 +214,7 @@ public class AtaqueGrafico {
                     alto--;
                 }
                 break;
-            case "Rayo":
+            default:
                 break;
         }
     }

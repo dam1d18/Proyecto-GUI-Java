@@ -9,12 +9,13 @@ import javax.swing.JPanel;
 
 public class JPanelConFondo extends JPanel {
 
-    public static int tiempo = 30;
+    public static int tiempo = 35;
     private Image imagenfondo;
     public Image imagen;
     public static AtaqueGrafico ataque;
     public static boolean pintarataque = false;
     public static int contadorpaint;
+    public static boolean equijugador;
 
     public JPanelConFondo(String nombreImagen) {
         setLayout(null);
@@ -23,6 +24,7 @@ public class JPanelConFondo extends JPanel {
 
     public void PintarAtaque(Pokemon p, Ataque a) throws InterruptedException {
         int contador;
+        equijugador = p.equijugador;
         pintarataque = true;
         ataque = new AtaqueGrafico(p, a);
         contadorpaint = 1;
@@ -104,7 +106,7 @@ public class JPanelConFondo extends JPanel {
                 break;
             case "Rayo":
                 if (p.equijugador) {
-                    while (ataque.y != 150) {
+                    while (ataque.y != 160) {
                         ataque.MovimientoAtaque(a);
                         repaint();
                         Thread.sleep(tiempo);
@@ -125,7 +127,7 @@ public class JPanelConFondo extends JPanel {
                         Thread.sleep(tiempo);
                     }
                 } else {
-                    while (ataque.y != 215) {
+                    while (ataque.y != 210) {
                         ataque.MovimientoAtaque(a);
                         repaint();
                         Thread.sleep(tiempo);
@@ -152,17 +154,30 @@ public class JPanelConFondo extends JPanel {
                 } else {
                     int x = ataque.x;
                     int y = ataque.y;
-                    for (int i = 0; i < contadorpaint; i++) {
-                        ataque.x = x;
-                        ataque.y = y;
-                        ataque.x += (i * 6);
-                        ataque.y -= i;
-                        ataque.paint(g2d);
+                    if (equijugador) {
+                        for (int i = 0; i < contadorpaint; i++) {
+                            ataque.x = x;
+                            ataque.y = y;
+                            ataque.x += (i * 6);
+                            ataque.y -= i;
+                            if (ataque.y > 160) {
+                                ataque.paint(g2d);
+                            }
+                        }
+                    } else {
+                        for (int i = 0; i < contadorpaint; i++) {
+                            ataque.x = x;
+                            ataque.y = y;
+                            ataque.x -= (i * 6);
+                            ataque.y += i;
+                            if (ataque.y < 210) {
+                                ataque.paint(g2d);
+                            }
+                        }
                     }
                     ataque.x = x;
                     ataque.y = y;
                     contadorpaint++;
-                    System.out.println("Paint " + contadorpaint);
                 }
             }
         } else {

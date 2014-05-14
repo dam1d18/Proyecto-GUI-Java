@@ -14,6 +14,7 @@ public class JPanelConFondo extends JPanel {
     public Image imagen;
     public static AtaqueGrafico ataque;
     public static boolean pintarataque = false;
+    public static int contadorpaint;
 
     public JPanelConFondo(String nombreImagen) {
         setLayout(null);
@@ -24,6 +25,8 @@ public class JPanelConFondo extends JPanel {
         int contador;
         pintarataque = true;
         ataque = new AtaqueGrafico(p, a);
+        contadorpaint = 1;
+        AtaqueGrafico.contadorrayo = 1;
         switch (a.efectovisual) {
             case "D":
                 if (p.equijugador) {
@@ -99,6 +102,21 @@ public class JPanelConFondo extends JPanel {
                 }
                 AtaqueGrafico.fondo = false;
                 break;
+            case "Rayo":
+                if (p.equijugador) {
+                    while (ataque.y != 150) {
+                        ataque.MovimientoAtaque(a);
+                        repaint();
+                        Thread.sleep(tiempo);
+                    }
+                } else {
+                    while (ataque.y != 215) {
+                        ataque.MovimientoAtaque(a);
+                        repaint();
+                        Thread.sleep(tiempo);
+                    }
+                }
+                break;
             default:
                 if (p.equijugador) {
                     while (ataque.y != 141) {
@@ -129,7 +147,23 @@ public class JPanelConFondo extends JPanel {
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                         RenderingHints.VALUE_ANTIALIAS_ON);
-                ataque.paint(g2d);
+                if (ataque.efectovisual.compareTo("Rayo") != 0) {
+                    ataque.paint(g2d);
+                } else {
+                    int x = ataque.x;
+                    int y = ataque.y;
+                    for (int i = 0; i < contadorpaint; i++) {
+                        ataque.x = x;
+                        ataque.y = y;
+                        ataque.x += (i * 6);
+                        ataque.y -= i;
+                        ataque.paint(g2d);
+                    }
+                    ataque.x = x;
+                    ataque.y = y;
+                    contadorpaint++;
+                    System.out.println("Paint " + contadorpaint);
+                }
             }
         } else {
             g.drawImage(ataque.dibujo, 0, 0, ataque.alto, ataque.ancho, this);

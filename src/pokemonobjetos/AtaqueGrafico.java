@@ -28,6 +28,7 @@ public class AtaqueGrafico {
     public static boolean equijugador;
     public static String efectovisual;
     public static boolean fondo;
+    public static int contadorrayo;
 
     public AtaqueGrafico(Pokemon p, Ataque a) {
         fondo = false;
@@ -87,6 +88,23 @@ public class AtaqueGrafico {
                 y = -20;
                 alto = 771;
                 ancho = 413;
+                break;
+            case "Rayo":
+                if (p.equijugador) {
+                    equijugador = true;
+                    x = 220;
+                    y = 210;
+                    ancho = 50;
+                    alto = 50;
+                    movy = false;
+                } else {
+                    equijugador = false;
+                    x = 520;
+                    y = 150;
+                    ancho = 50;
+                    alto = 50;
+                    movx = false;
+                }
                 break;
         }
         dibujo = ObtenerImagen(a);
@@ -194,6 +212,8 @@ public class AtaqueGrafico {
                     alto--;
                 }
                 break;
+            case "Rayo":
+                break;
         }
     }
 
@@ -204,6 +224,8 @@ public class AtaqueGrafico {
         if (dibujo != null) {
             g.drawImage(dibujo, x, y, alto, ancho, null);
         } else if (efectovisual.compareTo("P") == 0) {
+            g.drawOval(x, y, alto, ancho);
+        } else if (efectovisual.compareTo("Rayo)") == 0) {
             g.drawOval(x, y, alto, ancho);
         } else {
             g.fillOval(x, y, ancho, alto);
@@ -231,6 +253,21 @@ public class AtaqueGrafico {
             case "P":
                 break;
             case "F":
+                break;
+            case "Rayo":
+                if (JPanelConFondo.contadorpaint == contadorrayo) {
+                    if (movx) {
+                        x += 6;
+                    } else {
+                        x -= 6;
+                    }
+                    if (movy) {
+                        y++;
+                    } else {
+                        y--;
+                    }
+                    contadorrayo++;
+                }
                 break;
             default:
                 if (movx) {

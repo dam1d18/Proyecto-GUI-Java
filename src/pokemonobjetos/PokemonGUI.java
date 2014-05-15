@@ -2486,8 +2486,8 @@ public class PokemonGUI extends JFrame {
         if (entrenadorliga == 1 && !Juego.repetircombate) {
             menuelegirpokemon = false;
             //primo
-            //setSize(1280, 850);
-            setSize(1280, 768);
+            setSize(1280, 850);
+            //setSize(1280, 768);
 
             labelnombreentrenadorjugador.setBounds(50, 20, 70, 20);
             labelnombreentrenadorjugador.setText("Jugador");

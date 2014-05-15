@@ -25,13 +25,15 @@ public class PokemonGUI extends JFrame {
     static ObjectContainer bdataque;
     public static JButton botoniniciarjuego, botoncambiarpokemon, botoncarrera = new JButton(), botoncombatelibre = new JButton(), botonKanto, botonJohto, botonHoenn, botonSinnoh, botonTeselia, botonsiguienteentrenador = new JButton(),
             botoniraligapokemon = new JButton(), botonjefealtomando = new JButton(), botonatacar = new JButton(), botonestadisticasvictorias = new JButton(),
-            botonhallfama = new JButton(), botonestadisticasmodolibre = new JButton();
+            botonhallfama = new JButton(), botonestadisticasmodolibre = new JButton(), botontablatipos = new JButton(),
+            botonvolveratrasdesdetabla = new JButton(), botonvolveratrasdesdehallfama = new JButton(),
+            botonvolveratrasdesdeestadisticas = new JButton();
     public static JButton[] botontipocombate, botonelegirpokemon, botonpokemonelegidosJugador, botonpokemonelegidosIA, botonataques, botonlideres, botonaltomando, botonlistaestadisticas;
     public static JLabel label = new JLabel(), labelfotojugador = new JLabel(), labelfotoIA = new JLabel(), labelpsjugador = new JLabel(), labelpsIA = new JLabel(),
-            labelnombreentrenadorjugador = new JLabel(), labelnombreentrenadorIA = new JLabel(), labelfotoentrenadorIA = new JLabel();
-    public static JLabel labelsaludjugador = new JLabel(), labelsaludIA = new JLabel(), labelnombrejugador = new JLabel(),
-            labelnombreIA = new JLabel(), fototitulo = new JLabel(), fotohallfama = new JLabel();
-    public static JLabel[] lblestadisticas;
+            labelnombreentrenadorjugador = new JLabel(), labelnombreentrenadorIA = new JLabel(), labelfotoentrenadorIA = new JLabel(),
+            labelsaludjugador = new JLabel(), labelsaludIA = new JLabel(), labelnombrejugador = new JLabel(),
+            labelnombreIA = new JLabel(), fototitulo = new JLabel(), fotohallfama = new JLabel(), paneltipos = new JLabel(), paneltiposcalculo = new JLabel();
+    public static JLabel[] lblestadisticas, lblmultiplicador;
     public static JPanel contenedorlistapokemon = new JPanel(), contenedorpokemonsjugador = new JPanel(),
             contenedorpokemonsIA = new JPanel(), contenedorataques = new JPanel(),
             contenedorimagenjugador = new JPanel(), contenedorimagenIA = new JPanel(),
@@ -64,7 +66,9 @@ public class PokemonGUI extends JFrame {
     public static int probabilidadshiny = 15;
     public static int tiempo = 4;
     public static boolean modocarrera, kanto = false, johto = false, hoenn = false, sinnoh = false, teselia = false,
-            listeneratacar = false, iniciocombate = true;
+            listeneratacar = false, iniciocombate = true, volvermodojuego = false, volverpanel = false,
+            volverhallfama = false, volverestadisticas = false;
+    private JComboBox ComboTipo1, ComboTipo2;
     public static int entrenadorliga = 1;
     public static int MIN = 0, MAX = 100, INIT = 1;
     public static JSlider sliderecualizador = new JSlider(JSlider.HORIZONTAL, MIN, MAX, INIT);
@@ -146,81 +150,375 @@ public class PokemonGUI extends JFrame {
     }
 
     public void MenuElegirModoJuego() {
-        CrearEcualizador();
-        sliderecualizador.setVisible(false);
-        botoniniciarjuego.setVisible(false);
-        fototitulo.setVisible(false);
-        setSize(550, 300);
-        Centrar(this);
-        botoncarrera.setText("Modo Carrera");
-        botoncarrera.setFocusable(false);
-        botoncarrera.setBounds(150, 10, 220, 50);
-        add(botoncarrera);
+        if (!volvermodojuego) {
+            CrearEcualizador();
+            sliderecualizador.setVisible(false);
+            botoniniciarjuego.setVisible(false);
+            fototitulo.setVisible(false);
+            botoncarrera.setText("Modo Carrera");
+            botoncarrera.setFocusable(false);
+            botoncarrera.setBounds(150, 10, 220, 50);
+            add(botoncarrera);
 
-        botonhallfama.setBounds(150, 70, 220, 50);
-        botonhallfama.setFocusable(false);
-        botonhallfama.setText("Hall de la Fama");
-        add(botonhallfama);
+            botonhallfama.setBounds(150, 70, 220, 50);
+            botonhallfama.setFocusable(false);
+            botonhallfama.setText("Hall de la Fama");
+            add(botonhallfama);
 
-        botoncombatelibre.setBounds(150, 130, 220, 50);
-        botoncombatelibre.setFocusable(false);
-        botoncombatelibre.setText("Combate Libre");
-        add(botoncombatelibre);
+            botoncombatelibre.setBounds(150, 130, 220, 50);
+            botoncombatelibre.setFocusable(false);
+            botoncombatelibre.setText("Combate Libre");
+            add(botoncombatelibre);
 
-        botonestadisticasmodolibre.setBounds(150, 190, 220, 50);
-        botonestadisticasmodolibre.setFocusable(false);
-        botonestadisticasmodolibre.setText("Victorias Modo Libre");
-        add(botonestadisticasmodolibre);
+            botonestadisticasmodolibre.setBounds(150, 190, 220, 50);
+            botonestadisticasmodolibre.setFocusable(false);
+            botonestadisticasmodolibre.setText("Victorias Modo Libre");
+            add(botonestadisticasmodolibre);
 
-        botoncarrera.addActionListener(new ActionListener() {
+            botontablatipos.setBounds(150, 250, 220, 50);
+            botontablatipos.setFocusable(false);
+            botontablatipos.setText("Tabla de Tipos");
+            add(botontablatipos);
 
-            public void actionPerformed(ActionEvent e) {
-                modocarrera = true;
-                MenuElegirGeneracion();
-            }
-        });
+            botoncarrera.addActionListener(new ActionListener() {
 
-        botonhallfama.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    modocarrera = true;
+                    MenuElegirGeneracion();
+                }
+            });
 
-            public void actionPerformed(ActionEvent e) {
-                menuinicial = true;
-                botoncarrera.setVisible(false);
-                botonhallfama.setVisible(false);
-                botoncombatelibre.setVisible(false);
-                botonestadisticasmodolibre.setVisible(false);
-                MenuElegirGeneracion();
-            }
-        });
+            botonhallfama.addActionListener(new ActionListener() {
 
-        botoncombatelibre.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    menuinicial = true;
+                    botoncarrera.setVisible(false);
+                    botonhallfama.setVisible(false);
+                    botoncombatelibre.setVisible(false);
+                    botonestadisticasmodolibre.setVisible(false);
+                    MenuElegirGeneracion();
+                }
+            });
 
-            public void actionPerformed(ActionEvent e) {
-                modocarrera = false;
-                MenuTipoCombate();
-            }
-        });
+            botoncombatelibre.addActionListener(new ActionListener() {
 
-        botonestadisticasmodolibre.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    modocarrera = false;
+                    MenuTipoCombate();
+                }
+            });
 
-            public void actionPerformed(ActionEvent e) {
-                menuinicial = true;
-                botoncarrera.setVisible(false);
-                botonhallfama.setVisible(false);
-                botoncombatelibre.setVisible(false);
-                botonestadisticasmodolibre.setVisible(false);
-                File dir = new File(Lecturas.festadisticasvicrandom);
-                if (dir.exists()) {
-                    try {
-                        MenuEstadisticasVictorias();
-                    } catch (IOException ex) {
-                        Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+            botonestadisticasmodolibre.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+                    menuinicial = true;
+                    botoncarrera.setVisible(false);
+                    botonhallfama.setVisible(false);
+                    botoncombatelibre.setVisible(false);
+                    botonestadisticasmodolibre.setVisible(false);
+                    File dir = new File(Lecturas.festadisticasvicrandom);
+                    if (dir.exists()) {
+                        try {
+                            MenuEstadisticasVictorias();
+                        } catch (IOException ex) {
+                            Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ningún Pokémon ha ganado nunca, tienes que jugar más");
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Ningún Pokémon ha ganado nunca, tienes que jugar más");
+                }
+            });
+
+            botontablatipos.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+                    botoncarrera.setVisible(false);
+                    botonhallfama.setVisible(false);
+                    botoncombatelibre.setVisible(false);
+                    botonestadisticasmodolibre.setVisible(false);
+                    botontablatipos.setVisible(false);
+                    TablaTipos();
+                }
+            });
+        } else {
+            botoncarrera.setVisible(true);
+            botonhallfama.setVisible(true);
+            botoncombatelibre.setVisible(true);
+            botonestadisticasmodolibre.setVisible(true);
+            botontablatipos.setVisible(true);
+        }
+        setSize(540, 350);
+        Centrar(this);
+        volvermodojuego = true;
+    }
+
+    public void TablaTipos() {
+        if (!volverpanel) {
+            paneltipos.setBounds(6, 0, 700, 665);
+            paneltipos.setVisible(true);
+            paneltipos.setIcon(new ImageIcon("Recursos/Imagenes/Tipos/Tabla.png"));
+            add(paneltipos);
+            botonvolveratrasdesdetabla.setBounds(240, 672, 220, 50);
+            add(botonvolveratrasdesdetabla);
+            botonvolveratrasdesdetabla.setText("Volver atrás");
+            botonvolveratrasdesdetabla.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+                    paneltipos.setVisible(false);
+                    botonvolveratrasdesdetabla.setVisible(false);
+                    MenuElegirModoJuego();
+                }
+            });
+            //paneltiposcalculo.setBounds(null);
+            ComboTipo1 = new JComboBox();
+            ComboTipo2 = new JComboBox();
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/nnnn.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Acero.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Acero.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Agua.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Agua.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Bicho.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Bicho.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Dragon.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Dragon.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Electrico.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Electrico.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Fantasma.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Fantasma.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Fuego.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Fuego.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Hada.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Hada.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Hielo.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Hielo.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Lucha.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Lucha.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Normal.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Normal.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Planta.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Planta.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Psiquico.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Psiquico.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Roca.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Roca.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Siniestro.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Siniestro.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Tierra.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Tierra.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Veneno.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Veneno.gif"));
+            ComboTipo1.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Volador.gif"));
+            ComboTipo2.addItem(new ImageIcon("Recursos/Imagenes/Tipos/Volador.gif"));
+            ComboTipo1.setMaximumRowCount(ComboTipo1.getModel().getSize());
+            ComboTipo2.setMaximumRowCount(ComboTipo2.getModel().getSize());
+            ComboTipo1.setBounds(730, 10, 80, 30);
+            ComboTipo2.setBounds(939, 10, 80, 30);
+            add(ComboTipo1);
+            add(ComboTipo2);
+            paneltiposcalculo.setBounds(820, 10, 109, 665);
+            paneltiposcalculo.setVisible(true);
+            paneltiposcalculo.setIcon(new ImageIcon("Recursos/Imagenes/Tipos/TablaCalculo.png"));
+            add(paneltiposcalculo);
+            lblmultiplicador = new JLabel[18];
+            lblmultiplicador[0] = new JLabel();
+            lblmultiplicador[0].setBounds(75, 3, 30, 31);
+            paneltiposcalculo.add(lblmultiplicador[0]);
+            for (int i = 1; i < lblmultiplicador.length; i++) {
+                lblmultiplicador[i] = new JLabel();
+                lblmultiplicador[i].setBounds(75, 37 * i, 30, 31);
+                paneltiposcalculo.add(lblmultiplicador[i]);
+            }
+        } else {
+            paneltipos.setVisible(true);
+            botonvolveratrasdesdetabla.setVisible(true);
+        }
+        setSize(1280, 760);
+        Centrar(this);
+        ComboTipo1.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String tipo1 = String.valueOf(ComboTipo1.getSelectedItem());
+                tipo1 = String.valueOf(tipo1).substring(24, tipo1.length() - 4);
+                System.out.println(tipo1);
+                String tipo2 = String.valueOf(ComboTipo2.getSelectedItem());
+                tipo2 = String.valueOf(tipo2).substring(24, tipo2.length() - 4);
+                System.out.println(tipo2);
+                try {
+                    ComprobacionDebilidades(tipo1, tipo2);
+                } catch (IOException ex) {
+                    Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        ComboTipo2.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String tipo1 = String.valueOf(ComboTipo1.getSelectedItem());
+                tipo1 = String.valueOf(tipo1).substring(24, tipo1.length() - 4);
+                System.out.println(tipo1);
+                String tipo2 = String.valueOf(ComboTipo2.getSelectedItem());
+                tipo2 = String.valueOf(tipo2).substring(24, tipo2.length() - 4);
+                System.out.println(tipo2);
+                try {
+                    ComprobacionDebilidades(tipo1, tipo2);
+                } catch (IOException ex) {
+                    Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
 
+        volverpanel = true;
+    }
+
+    public void ComprobacionDebilidades(String tipo1, String tipo2) throws IOException {
+        String tipos[][];
+        int i;
+        int resultado;
+        boolean continuar = true;
+        if (tipo2.compareTo("nnnn") == 0) {
+            tipo2 = "n*n*";
+        }
+        for (int j = 0; j < 18; j++) {
+            tipos = Lecturas.DatosTipos(ObtenerTipos(j));
+            resultado = 3;
+            i = 0;
+            while (i < tipos[0].length && continuar) {
+                if (tipos[0][i].compareTo(tipo1) == 0) {
+                    resultado++;
+                    continuar = false;
+                }
+                i++;
+            }
+            i = 0;
+            while (i < tipos[1].length && continuar) {
+                if (tipos[1][i].compareTo(tipo1) == 0) {
+                    resultado--;
+                    continuar = false;
+                }
+                i++;
+            }
+            i = 0;
+            while (i < tipos[2].length && continuar) {
+                if (tipos[2][i].compareTo(tipo1) == 0) {
+                    resultado = 0;
+                    continuar = false;
+                }
+                i++;
+            }
+            if (resultado != 0) {
+                tipos = Lecturas.DatosTipos(ObtenerTipos(j));
+                continuar = true;
+                i = 0;
+                while (i < tipos[0].length && continuar) {
+                    if (tipos[0][i].compareTo(tipo2) == 0) {
+                        resultado++;
+                        continuar = false;
+                    }
+                    i++;
+                }
+                i = 0;
+                while (i < tipos[1].length && continuar) {
+                    if (tipos[1][i].compareTo(tipo2) == 0) {
+                        resultado--;
+                        continuar = false;
+                    }
+                    i++;
+                }
+                i = 0;
+                while (i < tipos[2].length && continuar) {
+                    if (tipos[2][i].compareTo(tipo2) == 0) {
+                        resultado = 0;
+                        continuar = false;
+                    }
+                    i++;
+                }
+            }
+            switch (resultado) {
+                case 0:
+                    lblmultiplicador[j].setIcon(new ImageIcon("Recursos/Imagenes/Tipos/cero.png"));
+                    break;
+                case 1:
+                    lblmultiplicador[j].setIcon(new ImageIcon("Recursos/Imagenes/Tipos/cuarto.png"));
+                    break;
+                case 2:
+                    lblmultiplicador[j].setIcon(new ImageIcon("Recursos/Imagenes/Tipos/mitad.png"));
+                    break;
+                case 3:
+                    lblmultiplicador[j].setIcon(new ImageIcon("Recursos/Imagenes/Tipos/normal.png"));
+                    break;
+                case 4:
+                    lblmultiplicador[j].setIcon(new ImageIcon("Recursos/Imagenes/Tipos/doble.png"));
+                    break;
+                case 5:
+                    lblmultiplicador[j].setIcon(new ImageIcon("Recursos/Imagenes/Tipos/cuadruple.png"));
+                    break;
+            }
+        }
+    }
+
+    public String ObtenerTipos(int i) {
+        String tipo = "";
+        switch (i) {
+            case 0:
+                tipo = "Acero";
+                break;
+            case 1:
+                tipo = "Agua";
+                break;
+            case 2:
+                tipo = "Bicho";
+                break;
+            case 3:
+                tipo = "Dragon";
+                break;
+            case 4:
+                tipo = "Electrico";
+                break;
+            case 5:
+                tipo = "Fantasma";
+                break;
+            case 6:
+                tipo = "Fuego";
+                break;
+            case 7:
+                tipo = "Hada";
+                break;
+            case 8:
+                tipo = "Hielo";
+                break;
+            case 9:
+                tipo = "Lucha";
+                break;
+            case 10:
+                tipo = "Normal";
+                break;
+            case 11:
+                tipo = "Planta";
+                break;
+            case 12:
+                tipo = "Psiquico";
+                break;
+            case 13:
+                tipo = "Roca";
+                break;
+            case 14:
+                tipo = "Siniestro";
+                break;
+            case 15:
+                tipo = "Tierra";
+                break;
+            case 16:
+                tipo = "Veneno";
+                break;
+            case 17:
+                tipo = "Volador";
+                break;
+            default:
+                break;
+        }
+        return tipo;
     }
 
     public void MenuElegirGeneracion() {
@@ -233,6 +531,7 @@ public class PokemonGUI extends JFrame {
         botonhallfama.setVisible(false);
         botoncombatelibre.setVisible(false);
         botonestadisticasmodolibre.setVisible(false);
+        botontablatipos.setVisible(false);
         botonKanto = new JButton();
         botonKanto.setBounds(150, 10, 270, 40);
         botonKanto.setText("Kanto");
@@ -787,7 +1086,7 @@ public class PokemonGUI extends JFrame {
         tipo1IA = new JLabel[Juego.npokemonequipo];
         tipo2IA = new JLabel[Juego.npokemonequipo];
         scrollpokemonlista = new JScrollPane(contenedorlistapokemon);
-        scrollpokemonlista.getVerticalScrollBar().setUnitIncrement(28);
+        scrollpokemonlista.getVerticalScrollBar().setUnitIncrement(31);
         scrollpokemonlista.setBounds(280, 39, 990, 740);
         add(scrollpokemonlista);
 
@@ -2671,76 +2970,80 @@ public class PokemonGUI extends JFrame {
         }
         setSize(1280, 860);
         Centrar(this);
-
-        fotohallfama.setBounds(510, 5, 251, 121);
-        String foto;
-        if (kanto) {
-            foto = "Kanto";
-        } else if (johto) {
-            foto = "Johto";
-        } else if (hoenn) {
-            foto = "Hoenn";
-        } else if (sinnoh) {
-            foto = "Sinnoh";
-        } else {
-            foto = "Teselia";
-        }
-        fotohallfama.setIcon(new ImageIcon(((new ImageIcon("Recursos/Imagenes/Miscelanea/Pokemon " + foto + ".png")).getImage()).getScaledInstance(250, 120, java.awt.Image.SCALE_SMOOTH)));
-        add(fotohallfama);
-        int l = 0;
-        contenedorlistaestadisticas.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        String[][] Poke = Lecturas.MostrarHallFamaOrdenado();
-        Pokemon p;
-        for (int i = 0; i < Poke.length; i++) {
-            for (int j = 0; j < Poke[i].length; j++) {
-                System.out.print(Poke[i][j] + " | ");
-            }
-            System.out.println("");
-        }
-        tipo1estadisticas = new JLabel[Poke.length];
-        tipo2estadisticas = new JLabel[Poke.length];
-        botonlistaestadisticas = new JButton[Poke.length];
-        for (int i = 0; i < botonlistaestadisticas.length; i++) {
-            p = Pokemon.PokemonElegido(bdpokemon, Integer.parseInt(Poke[i][0]));
-            //System.out.println(i);
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.weightx = 0.5;
-            if (i % 3 == 0) {
-                l = 0;
-            }
-            c.gridx = l;
-            c.gridy = i - l;
-            botonlistaestadisticas[i] = new JButton();
-            botonlistaestadisticas[i].setText(p.codigo + " - " + p.nombre + " → " + Poke[i][1]);
-            //botonelegirpokemon[i].setFont(new Font("Helvetica", Font.BOLD, 15));
-
-            botonlistaestadisticas[i].setLayout(new BoxLayout(botonlistaestadisticas[i], BoxLayout.Y_AXIS));
-            botonlistaestadisticas[i].add(Box.createRigidArea(new Dimension(5, 18)));
-            botonlistaestadisticas[i].setFocusable(false);
-            tipo1estadisticas[i] = new JLabel();
-            //tipo1[i].setBackground(Color.red);
-            tipo1estadisticas[i].setIcon(new ImageIcon("Recursos/Imagenes/Tipos/" + p.tipo1 + ".gif"));
-            botonlistaestadisticas[i].add(tipo1estadisticas[i]);
-            botonlistaestadisticas[i].add(Box.createRigidArea(new Dimension(5, 10)));
-            tipo2estadisticas[i] = new JLabel();
-            //tipo2[i].setBackground(Color.red);
-            if (p.tipo2.compareTo("n*n*") != 0) {
-                tipo2estadisticas[i].setIcon(new ImageIcon("Recursos/Imagenes/Tipos/" + p.tipo2 + ".gif"));
+        if (!volverhallfama) {
+            fotohallfama.setBounds(510, 5, 251, 121);
+            String foto;
+            if (kanto) {
+                foto = "Kanto";
+            } else if (johto) {
+                foto = "Johto";
+            } else if (hoenn) {
+                foto = "Hoenn";
+            } else if (sinnoh) {
+                foto = "Sinnoh";
             } else {
-                botonlistaestadisticas[i].add(Box.createRigidArea(new Dimension(5, 18)));
+                foto = "Teselia";
             }
-            botonlistaestadisticas[i].add(tipo2estadisticas[i]);
+            fotohallfama.setIcon(new ImageIcon(((new ImageIcon("Recursos/Imagenes/Miscelanea/Pokemon " + foto + ".png")).getImage()).getScaledInstance(250, 120, java.awt.Image.SCALE_SMOOTH)));
+            add(fotohallfama);
+            int l = 0;
+            contenedorlistaestadisticas.setLayout(new GridBagLayout());
+            GridBagConstraints c = new GridBagConstraints();
+            String[][] Poke = Lecturas.MostrarHallFamaOrdenado();
+            Pokemon p;
+            for (int i = 0; i < Poke.length; i++) {
+                for (int j = 0; j < Poke[i].length; j++) {
+                    System.out.print(Poke[i][j] + " | ");
+                }
+                System.out.println("");
+            }
+            tipo1estadisticas = new JLabel[Poke.length];
+            tipo2estadisticas = new JLabel[Poke.length];
+            botonlistaestadisticas = new JButton[Poke.length];
+            for (int i = 0; i < botonlistaestadisticas.length; i++) {
+                p = Pokemon.PokemonElegido(bdpokemon, Integer.parseInt(Poke[i][0]));
+                //System.out.println(i);
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.weightx = 0.5;
+                if (i % 3 == 0) {
+                    l = 0;
+                }
+                c.gridx = l;
+                c.gridy = i - l;
+                botonlistaestadisticas[i] = new JButton();
+                botonlistaestadisticas[i].setText(p.codigo + " - " + p.nombre + " → " + Poke[i][1]);
+                //botonelegirpokemon[i].setFont(new Font("Helvetica", Font.BOLD, 15));
 
-            botonlistaestadisticas[i].add(Box.createRigidArea(new Dimension(5, 18)));
-            botonlistaestadisticas[i].setIcon(new ImageIcon("Recursos/Imagenes/Frente/" + p.codigo + ".png"));
-            contenedorlistaestadisticas.add(botonlistaestadisticas[i], c);
-            l++;
+                botonlistaestadisticas[i].setLayout(new BoxLayout(botonlistaestadisticas[i], BoxLayout.Y_AXIS));
+                botonlistaestadisticas[i].add(Box.createRigidArea(new Dimension(5, 18)));
+                botonlistaestadisticas[i].setFocusable(false);
+                tipo1estadisticas[i] = new JLabel();
+                //tipo1[i].setBackground(Color.red);
+                tipo1estadisticas[i].setIcon(new ImageIcon("Recursos/Imagenes/Tipos/" + p.tipo1 + ".gif"));
+                botonlistaestadisticas[i].add(tipo1estadisticas[i]);
+                botonlistaestadisticas[i].add(Box.createRigidArea(new Dimension(5, 10)));
+                tipo2estadisticas[i] = new JLabel();
+                //tipo2[i].setBackground(Color.red);
+                if (p.tipo2.compareTo("n*n*") != 0) {
+                    tipo2estadisticas[i].setIcon(new ImageIcon("Recursos/Imagenes/Tipos/" + p.tipo2 + ".gif"));
+                } else {
+                    botonlistaestadisticas[i].add(Box.createRigidArea(new Dimension(5, 18)));
+                }
+                botonlistaestadisticas[i].add(tipo2estadisticas[i]);
+
+                botonlistaestadisticas[i].add(Box.createRigidArea(new Dimension(5, 18)));
+                botonlistaestadisticas[i].setIcon(new ImageIcon("Recursos/Imagenes/Frente/" + p.codigo + ".png"));
+                contenedorlistaestadisticas.add(botonlistaestadisticas[i], c);
+                l++;
+            }
+            scrolllistaestadisticas = new JScrollPane(contenedorlistaestadisticas);
+            scrolllistaestadisticas.getVerticalScrollBar().setUnitIncrement(28);
+            scrolllistaestadisticas.setBounds(20, 139, 1240, 640);
+            add(scrolllistaestadisticas);
+        } else {
+
         }
-        scrolllistaestadisticas = new JScrollPane(contenedorlistaestadisticas);
-        scrolllistaestadisticas.getVerticalScrollBar().setUnitIncrement(28);
-        scrolllistaestadisticas.setBounds(20, 139, 1240, 640);
-        add(scrolllistaestadisticas);
+        volverhallfama = false;
     }
 
     public void Centrar(Window frame) {
@@ -3202,7 +3505,7 @@ public class PokemonGUI extends JFrame {
             if (equipojugador[pokemonencombatejugador].turnosincapacitado == 0 && equipojugador[pokemonencombatejugador].pasar == 0
                     && equipojugador[pokemonencombatejugador].Vivo() && !equipojugador[pokemonencombatejugador].descansar
                     && !atacaiaporcambiarpokemonjugador && !equipojugador[pokemonencombatejugador].noatacar
-                    && equipoIA[pokemonencombateIA].Vivo()) {
+                    && equipoIA[pokemonencombateIA].antesgolpe > 0) {
                 if (equipojugador[pokemonencombatejugador].ataqueelegido.compareTo("Descansar") != 0) {
                     try {
                         panelcombate.PintarAtaque(equipojugador[pokemonencombatejugador], ataquejugador[pokemonencombatejugador][ataqueusadojugador]);
@@ -3307,7 +3610,7 @@ public class PokemonGUI extends JFrame {
             }
             if (equipoIA[pokemonencombateIA].turnosincapacitado == 0 && equipoIA[pokemonencombateIA].pasar == 0
                     && equipoIA[pokemonencombateIA].Vivo() && !equipoIA[pokemonencombateIA].descansar && !equipoIA[pokemonencombateIA].noatacar
-                    && equipojugador[pokemonencombatejugador].Vivo()) {
+                    && equipojugador[pokemonencombatejugador].antesgolpe > 0) {
                 if (equipoIA[pokemonencombateIA].ataqueelegido.compareTo("Descansar") != 0) {
                     try {
                         panelcombate.PintarAtaque(equipoIA[pokemonencombateIA], ataqueIA[pokemonencombateIA][ataqueusadoIA]);

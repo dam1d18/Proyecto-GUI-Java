@@ -225,9 +225,7 @@ public class AtaqueGrafico {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         if (dibujo != null) {
             g.drawImage(dibujo, x, y, alto, ancho, null);
-        } else if (efectovisual.compareTo("P") == 0) {
-            g.drawOval(x, y, alto, ancho);
-        } else if (efectovisual.compareTo("Rayo)") == 0) {
+        } else if (efectovisual.compareTo("P") == 0 || efectovisual.compareTo("Rayo)") == 0) {
             g.drawOval(x, y, alto, ancho);
         } else {
             g.fillOval(x, y, ancho, alto);
@@ -250,11 +248,9 @@ public class AtaqueGrafico {
                 }
                 break;
             case "R":
-                //No se mueve, solo se redimensiona
-                break;
             case "P":
-                break;
             case "F":
+                //No se mueve, solo se redimensiona
                 break;
             case "Rayo":
                 if (JPanelConFondo.contadorpaint == contadorrayo) {

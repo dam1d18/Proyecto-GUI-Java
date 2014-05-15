@@ -3526,7 +3526,7 @@ public class PokemonGUI extends JFrame {
             if (equipojugador[pokemonencombatejugador].turnosincapacitado == 0 && equipojugador[pokemonencombatejugador].pasar == 0
                     && equipojugador[pokemonencombatejugador].Vivo() && !equipojugador[pokemonencombatejugador].descansar
                     && !atacaiaporcambiarpokemonjugador && !equipojugador[pokemonencombatejugador].noatacar
-                    && equipoIA[pokemonencombateIA].antesgolpe > 0) {
+                    && equipoIA[pokemonencombateIA].saludantesgolpe > 0) {
                 if (equipojugador[pokemonencombatejugador].ataqueelegido.compareTo("Descansar") != 0) {
                     try {
                         panelcombate.PintarAtaque(equipojugador[pokemonencombatejugador], ataquejugador[pokemonencombatejugador][ataqueusadojugador]);
@@ -3631,7 +3631,7 @@ public class PokemonGUI extends JFrame {
             }
             if (equipoIA[pokemonencombateIA].turnosincapacitado == 0 && equipoIA[pokemonencombateIA].pasar == 0
                     && equipoIA[pokemonencombateIA].Vivo() && !equipoIA[pokemonencombateIA].descansar && !equipoIA[pokemonencombateIA].noatacar
-                    && equipojugador[pokemonencombatejugador].antesgolpe > 0) {
+                    && equipojugador[pokemonencombatejugador].saludantesgolpe > 0) {
                 if (equipoIA[pokemonencombateIA].ataqueelegido.compareTo("Descansar") != 0) {
                     try {
                         panelcombate.PintarAtaque(equipoIA[pokemonencombateIA], ataqueIA[pokemonencombateIA][ataqueusadoIA]);

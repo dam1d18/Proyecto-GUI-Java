@@ -615,7 +615,6 @@ public class Pokemon {
             i++;
         }
         if (resultado != 0) {
-            tipos = Lecturas.DatosTipos(tipoataque);
             continuar = true;
             i = 0;
             while (i < tipos[0].length && continuar) {

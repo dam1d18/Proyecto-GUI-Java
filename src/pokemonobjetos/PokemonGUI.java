@@ -216,6 +216,7 @@ public class PokemonGUI extends JFrame {
                     botonhallfama.setVisible(false);
                     botoncombatelibre.setVisible(false);
                     botonestadisticasmodolibre.setVisible(false);
+                    botontablatipos.setVisible(false);
                     File dir = new File(Lecturas.festadisticasvicrandom);
                     if (dir.exists()) {
                         try {
@@ -254,11 +255,11 @@ public class PokemonGUI extends JFrame {
 
     public void TablaTipos() {
         if (!volverpanel) {
-            paneltipos.setBounds(6, 0, 700, 665);
+            paneltipos.setBounds(6, 10, 700, 665);
             paneltipos.setVisible(true);
             paneltipos.setIcon(new ImageIcon("Recursos/Imagenes/Tipos/Tabla.png"));
             add(paneltipos);
-            botonvolveratrasdesdetabla.setBounds(240, 672, 220, 50);
+            botonvolveratrasdesdetabla.setBounds(400, 680, 220, 50);
             add(botonvolveratrasdesdetabla);
             botonvolveratrasdesdetabla.setText("Volver atrás");
             botonvolveratrasdesdetabla.addActionListener(new ActionListener() {
@@ -266,6 +267,12 @@ public class PokemonGUI extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     paneltipos.setVisible(false);
                     botonvolveratrasdesdetabla.setVisible(false);
+                    ComboTipo1.setVisible(false);
+                    ComboTipo2.setVisible(false);
+                    paneltiposcalculo.setVisible(false);
+                    for (int i = 0; i < lblmultiplicador.length; i++) {
+                        lblmultiplicador[i].setVisible(false);
+                    }
                     MenuElegirModoJuego();
                 }
             });
@@ -331,8 +338,14 @@ public class PokemonGUI extends JFrame {
         } else {
             paneltipos.setVisible(true);
             botonvolveratrasdesdetabla.setVisible(true);
+            ComboTipo1.setVisible(true);
+            ComboTipo2.setVisible(true);
+            paneltiposcalculo.setVisible(true);
+            for (int i = 0; i < lblmultiplicador.length; i++) {
+                lblmultiplicador[i].setVisible(true);
+            }
         }
-        setSize(1280, 760);
+        setSize(1040, 768);
         Centrar(this);
         ComboTipo1.addActionListener(new ActionListener() {
 
@@ -357,10 +370,8 @@ public class PokemonGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String tipo1 = String.valueOf(ComboTipo1.getSelectedItem());
                 tipo1 = String.valueOf(tipo1).substring(24, tipo1.length() - 4);
-                System.out.println(tipo1);
                 String tipo2 = String.valueOf(ComboTipo2.getSelectedItem());
                 tipo2 = String.valueOf(tipo2).substring(24, tipo2.length() - 4);
-                System.out.println(tipo2);
                 try {
                     ComprobacionDebilidades(tipo1, tipo2);
                 } catch (IOException ex) {
@@ -376,7 +387,7 @@ public class PokemonGUI extends JFrame {
         String tipos[][];
         int i;
         int resultado;
-        boolean continuar = true;
+        boolean continuar;
         if (tipo2.compareTo("nnnn") == 0) {
             tipo2 = "n*n*";
         }
@@ -384,6 +395,7 @@ public class PokemonGUI extends JFrame {
             tipos = Lecturas.DatosTipos(ObtenerTipos(j));
             resultado = 3;
             i = 0;
+            continuar = true;
             while (i < tipos[0].length && continuar) {
                 if (tipos[0][i].compareTo(tipo1) == 0) {
                     resultado++;
@@ -408,7 +420,6 @@ public class PokemonGUI extends JFrame {
                 i++;
             }
             if (resultado != 0) {
-                tipos = Lecturas.DatosTipos(ObtenerTipos(j));
                 continuar = true;
                 i = 0;
                 while (i < tipos[0].length && continuar) {
@@ -527,6 +538,7 @@ public class PokemonGUI extends JFrame {
         kanto = false;
         johto = false;
         hoenn = false;
+
         botoncarrera.setVisible(false);
         botonhallfama.setVisible(false);
         botoncombatelibre.setVisible(false);
@@ -534,22 +546,32 @@ public class PokemonGUI extends JFrame {
         botontablatipos.setVisible(false);
         botonKanto = new JButton();
         botonKanto.setBounds(150, 10, 270, 40);
+        botonKanto.setFocusable(false);
         botonKanto.setText("Kanto");
         add(botonKanto);
+
         botonJohto = new JButton();
         botonJohto.setBounds(150, 60, 270, 40);
+        botonJohto.setFocusable(false);
+
         botonJohto.setText("Johto");
         add(botonJohto);
         botonHoenn = new JButton();
         botonHoenn.setBounds(150, 110, 270, 40);
+        botonHoenn.setFocusable(false);
+
         botonHoenn.setText("Hoenn");
         add(botonHoenn);
         botonSinnoh = new JButton();
         botonSinnoh.setBounds(150, 160, 270, 40);
+        botonSinnoh.setFocusable(false);
+
         botonSinnoh.setText("Sinnoh");
         add(botonSinnoh);
         botonTeselia = new JButton();
         botonTeselia.setBounds(150, 210, 270, 40);
+        botonTeselia.setFocusable(false);
+
         botonTeselia.setText("Teselia");
         add(botonTeselia);
         tipocombate = 3;
@@ -735,6 +757,7 @@ public class PokemonGUI extends JFrame {
         botoncombatelibre.setVisible(false);
         botonestadisticasmodolibre.setVisible(false);
         botoniniciarjuego.setVisible(false);
+        botontablatipos.setVisible(false);
         setSize(551, 200);
         Centrar(this);
         label.setText("¿Qué tipo de combate desea?");
@@ -2463,8 +2486,8 @@ public class PokemonGUI extends JFrame {
         if (entrenadorliga == 1 && !Juego.repetircombate) {
             menuelegirpokemon = false;
             //primo
-            setSize(1280, 850);
-            //setSize(1280, 768);
+            //setSize(1280, 850);
+            setSize(1280, 768);
 
             labelnombreentrenadorjugador.setBounds(50, 20, 70, 20);
             labelnombreentrenadorjugador.setText("Jugador");
@@ -3040,8 +3063,6 @@ public class PokemonGUI extends JFrame {
             scrolllistaestadisticas.getVerticalScrollBar().setUnitIncrement(28);
             scrolllistaestadisticas.setBounds(20, 139, 1240, 640);
             add(scrolllistaestadisticas);
-        } else {
-
         }
         volverhallfama = false;
     }

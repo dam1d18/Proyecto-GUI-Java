@@ -293,7 +293,9 @@ public class Ataque {
             case 101:
             case 310:
                 if (Math.random() * 100 < 30) {
-                    if (j2.estado.compareTo("Normal") == 0 && (j1.categoriaataque.compareTo("F") == 0 || j2.categoriaataque.compareTo("F") == 0)) {
+                    if (j2.estado.compareTo("Normal") == 0 && (j1.categoriaataque.compareTo("F") == 0 || j2.categoriaataque.compareTo("F") == 0)
+                            && j2.tipo1.compareTo("Electrico") != 0 && j2.tipo2.compareTo("Electrico") != 0) {
+                        j2.velocidad = j2.velocidad / 4;
                         j2.estado = "Paralizado";
                         System.out.println(j2.nombre.trim() + " quedó paralizado al entrar en contacto con " + j1.nombre + ".");
                         str += j2.nombre.trim() + " quedó paralizado al entrar en contacto con " + j1.nombre + ".";

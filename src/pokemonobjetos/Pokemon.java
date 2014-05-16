@@ -1212,26 +1212,30 @@ public class Pokemon {
                     j1.estado = "Normal";
                 } else if (j1.estado.compareTo("Quemado") == 0) {
                     str += j1.nombre + " hizo sanar la brutal quemadura que sufría.";
+                    j1.ataque += 40;
                     j1.estado = "Normal";
                 } else if (j1.estado.compareTo("Paralizado") == 0) {
                     str += j1.nombre + " eliminó su parálisis al instante.";
+                    j1.velocidad = j1.velocidad * 4;
                     j1.estado = "Normal";
                 } else {
                     str += "Alivio de " + j1.nombre + "no eliminó ningún problema de estado";
                 }
                 break;
             case "Aromaterapia":
-                for (int j = 0; j < equipo.length; j++) {
-                    if (equipo[j].estado.compareTo("Debilitado") != 0 && equipo[j].estado.compareTo("Congelado") != 0 && equipo[j].estado.compareTo("Maldito") != 0 && equipo[j].estado.compareTo("Confuso") != 0 && equipo[j].estado.compareTo("Enamorado") != 0) {
-                        equipo[j].estado = "Normal";
-                    }
-                }
-                System.out.println(j1.nombre.trim() + " devolvió a todos los miembros del equipo a su estado natural.");
-                str += j1.nombre + " devolvió a todos los miembros del equipo a su estado natural.";
-                break;
             case "Campana cura":
                 for (int j = 0; j < equipo.length; j++) {
                     if (equipo[j].estado.compareTo("Debilitado") != 0 && equipo[j].estado.compareTo("Maldito") != 0 && equipo[j].estado.compareTo("Confuso") != 0 && equipo[j].estado.compareTo("Enamorado") != 0) {
+                        switch (equipo[j].estado) {
+                            case "Quemado":
+                                equipo[j].velocidad = equipo[j].velocidad * 4;
+                                break;
+                            case "Paralizado":
+                                equipo[j].ataque +=40;
+                                break;
+                            default:
+                                break;
+                        }
                         equipo[j].estado = "Normal";
                     }
                 }
@@ -1662,6 +1666,7 @@ public class Pokemon {
                     if (j2.tipo1.trim().compareTo("Electrico") != 0 && j2.tipo2.trim().compareTo("Electrico") != 0) {
                         System.out.println(j1.nombre.trim() + " paralizó a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".");
                         str += j1.nombre.trim() + " paralizó a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".";
+                        j2.velocidad = j2.velocidad / 4;
                         j2.estado = "Paralizado";
                     } else {
                         System.out.println(j2.nombre.trim() + " es de tipo eléctrico y no se ve afectado por " + ataqueelegido.trim() + ".");
@@ -1676,6 +1681,7 @@ public class Pokemon {
             case "Lenguetazo":
                 if (Math.random() * 100 < 10) {
                     if (j2.estado.compareTo("Normal") == 0 && j2.tipo1.compareTo("Normal") != 0 && j2.tipo2.compareTo("Normal") != 0 && !j2.protegeestado) {
+                        j2.velocidad = j2.velocidad / 4;
                         j2.estado = "Paralizado";
                         System.out.println(j2.nombre.trim() + " quedó paralizado por el " + ataqueelegido.trim() + ".");
                         str += j2.nombre.trim() + " quedó paralizado por el " + ataqueelegido.trim() + ".";
@@ -1687,6 +1693,7 @@ public class Pokemon {
             case "Palmeo":
                 if (Math.random() * 100 < 30) {
                     if (j2.estado.compareTo("Normal") == 0 && !j2.protegeestado) {
+                        j2.velocidad = j2.velocidad / 4;
                         j2.estado = "Paralizado";
                         System.out.println(j2.nombre.trim() + " quedó paralizado por el " + ataqueelegido.trim() + ".");
                         str += j2.nombre.trim() + " quedó paralizado por el " + ataqueelegido.trim() + ".";
@@ -1699,6 +1706,7 @@ public class Pokemon {
                     if (j2.tipo1.trim().compareTo("Fuego") != 0 && j2.tipo2.trim().compareTo("Fuego") != 0) {
                         System.out.println(j1.nombre.trim() + " quemó a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".");
                         str += j1.nombre.trim() + " quemó a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".";
+                        j2.ataque -= 40;
                         j2.estado = "Quemado";
                     } else {
                         System.out.println(j2.nombre.trim() + " es de tipo fuego y no se ve afectado por " + ataqueelegido.trim() + ".");
@@ -1715,6 +1723,7 @@ public class Pokemon {
                         if (j2.tipo1.trim().compareTo("Fuego") != 0 && j2.tipo2.trim().compareTo("Fuego") != 0) {
                             System.out.println(j1.nombre.trim() + " quemó a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".");
                             str += j1.nombre.trim() + " quemó a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".";
+                            j2.ataque -= 40;
                             j2.estado = "Quemado";
                         } else {
                             System.out.println(j2.nombre.trim() + " es de tipo fuego y no se ve afectado por " + ataqueelegido.trim() + ".");
@@ -1732,6 +1741,7 @@ public class Pokemon {
                         if (j2.tipo1.trim().compareTo("Fuego") != 0 && j2.tipo2.trim().compareTo("Fuego") != 0) {
                             System.out.println(j1.nombre.trim() + " quemó a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".");
                             str += j1.nombre.trim() + " quemó a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".";
+                            j2.ataque -= 40;
                             j2.estado = "Quemado";
                         } else {
                             System.out.println(j2.nombre.trim() + " es de tipo fuego y no se ve afectado por el calor de " + ataqueelegido.trim() + ".");
@@ -1753,6 +1763,7 @@ public class Pokemon {
                         if (j2.tipo1.trim().compareTo("Fuego") != 0 && j2.tipo2.trim().compareTo("Fuego") != 0) {
                             System.out.println(j1.nombre.trim() + " quemó a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".");
                             str += j1.nombre.trim() + " quemó a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".";
+                            j2.ataque -= 40;
                             j2.estado = "Quemado";
                         } else {
                             System.out.println(j2.nombre.trim() + " es de tipo fuego y no se ve afectado por el calor de " + ataqueelegido.trim() + ".");
@@ -1862,21 +1873,23 @@ public class Pokemon {
                         aleatorio = Math.random() * 3;
                         switch ((int) aleatorio) {
                             case 0:
-                                if (j2.tipo1.trim().compareTo("Electrico") != 0 && j2.tipo2.trim().compareTo("Electrico") != 0 && (Math.random() * 100) < 10) {
+                                if (j2.tipo1.trim().compareTo("Electrico") != 0 && j2.tipo2.trim().compareTo("Electrico") != 0 && (Math.random() * 100) < 20) {
+                                    j2.velocidad = j2.velocidad / 4;
+                                    j2.estado = "Paralizado";
                                     System.out.println(j1.nombre.trim() + " dejó paralizado a " + j2.nombre.trim() + ".");
                                     str += j1.nombre.trim() + " dejó paralizado a " + j2.nombre.trim() + ".";
-                                    j2.estado = "Paralizado";
                                 }
                                 break;
                             case 1:
-                                if (j2.tipo1.trim().compareTo("Fuego") != 0 && j2.tipo2.trim().compareTo("Fuego") != 0 && (Math.random() * 100) < 5) {
+                                if (j2.tipo1.trim().compareTo("Fuego") != 0 && j2.tipo2.trim().compareTo("Fuego") != 0 && (Math.random() * 100) < 20) {
                                     System.out.println(j1.nombre.trim() + " quemó a " + j2.nombre.trim() + ".");
                                     str += j1.nombre.trim() + " quemó a " + j2.nombre.trim() + ".";
+                                    j2.ataque -= 40;
                                     j2.estado = "Quemado";
                                 }
                                 break;
                             case 2:
-                                if (j2.tipo1.trim().compareTo("Hielo") != 0 && j2.tipo2.trim().compareTo("Hielo") != 0 && (Math.random() * 100) < 5) {
+                                if (j2.tipo1.trim().compareTo("Hielo") != 0 && j2.tipo2.trim().compareTo("Hielo") != 0 && (Math.random() * 100) < 20) {
                                     System.out.println(j1.nombre.trim() + " congeló a " + j2.nombre.trim() + ".");
                                     str += j1.nombre.trim() + " congeló a " + j2.nombre.trim() + ".";
                                     j2.estado = "Congelar";
@@ -1996,6 +2009,7 @@ public class Pokemon {
                 break;
             case "Electrocanon":
                 if (j2.estado.compareTo("Normal") == 0 && j2.tipo1.compareTo("Electrico") != 0 && j2.tipo2.compareTo("Electrico") != 0 && !j2.protegeestado) {
+                    j2.velocidad = j2.velocidad / 4;
                     j2.estado = "Paralizado";
                     System.out.println(j1.nombre.trim() + " dejó paralizado a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".");
                     str += j1.nombre.trim() + " dejó paralizado a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".";
@@ -2406,12 +2420,14 @@ public class Pokemon {
                             if (j2.estado.compareTo("Normal") == 0 && j2.tipo1.trim().compareTo("Fuego") != 0 && j2.tipo2.trim().compareTo("Fuego") != 0 && (Math.random() * 100) < 10) {
                                 System.out.println(j1.nombre.trim() + " quemó a " + j2.nombre.trim() + ".");
                                 str += j1.nombre.trim() + " quemó a " + j2.nombre.trim() + ".";
+                                j2.ataque -= 40;
                                 j2.estado = "Quemado";
                             }
                         } else {
                             if (j2.estado.compareTo("Normal") == 0 && j2.tipo1.trim().compareTo("Fuego") != 0 && j2.tipo2.trim().compareTo("Fuego") != 0 && (Math.random() * 100) < 30) {
                                 System.out.println(j1.nombre.trim() + " quemó a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".");
                                 str += j1.nombre.trim() + " quemó a " + j2.nombre.trim() + " con " + ataqueelegido.trim() + ".";
+                                j2.ataque -= 40;
                                 j2.estado = "Quemado";
                             }
                         }
@@ -2428,9 +2444,10 @@ public class Pokemon {
                     if (ataqueelegido.trim().compareTo("Rayo carga") != 0 && ataqueelegido.trim().compareTo("Chispazo") != 0 && ataqueelegido.trim().compareTo("Bola voltio") != 0 && ataqueelegido.trim().compareTo("Chispa") != 0 && ataqueelegido.trim().compareTo("Onda voltio") != 0) {
                         if (j2.tipo1.compareTo("Tierra") != 0 && j2.tipo2.compareTo("Tierra") != 0) {
                             if (j2.estado.compareTo("Normal") == 0 && j2.tipo1.trim().compareTo("Electrico") != 0 && j2.tipo2.trim().compareTo("Electrico") != 0 && (Math.random() * 100) < 10) {
+                                j2.velocidad = j2.velocidad / 4;
+                                j2.estado = "Paralizado";
                                 System.out.println(j1.nombre.trim() + " dejó paralizado a " + j2.nombre.trim() + ".");
                                 str += j1.nombre.trim() + " dejó paralizado a " + j2.nombre.trim() + ".";
-                                j2.estado = "Paralizado";
                             }
                         }
                     }
@@ -2617,7 +2634,7 @@ public class Pokemon {
                 }
                 break;
             case "Paralizado":
-                if (Math.random() * 100 < 40) {
+                if (Math.random() * 100 < 25) {
                     j1.noatacar = true;
                     System.out.println(j1.nombre.trim() + " está completamente paralizado.");
                     str += j1.nombre.trim() + " está completamente paralizado.";

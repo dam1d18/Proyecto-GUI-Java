@@ -90,6 +90,7 @@ public class PokemonGUI extends JFrame {
         setLayout(null);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         panelfondo = new JPanelFondo("Combate.png");
+        panelfondo.setBounds(0, 0, getWidth(), getHeight());
         setContentPane(panelfondo);
         setIconImage(new ImageIcon(getClass().getResource("Icono/Pokeball.png")).getImage());
         Centrar(this);

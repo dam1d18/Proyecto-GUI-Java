@@ -357,10 +357,15 @@ public class PokemonGUI extends JFrame {
                 String tipo2 = String.valueOf(ComboTipo2.getSelectedItem());
                 tipo2 = String.valueOf(tipo2).substring(24, tipo2.length() - 4);
                 System.out.println(tipo2);
-                try {
-                    ComprobacionDebilidades(tipo1, tipo2);
-                } catch (IOException ex) {
-                    Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+                if (tipo1.compareTo(tipo2) != 0) {
+                    try {
+                        ComprobacionDebilidades(tipo1, tipo2);
+                    } catch (IOException ex) {
+                        Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "¡Un pokémon no puede tener 2 veces el mismo tipo!");
+                    ComboTipo2.setSelectedIndex(0);
                 }
             }
         });
@@ -372,10 +377,15 @@ public class PokemonGUI extends JFrame {
                 tipo1 = String.valueOf(tipo1).substring(24, tipo1.length() - 4);
                 String tipo2 = String.valueOf(ComboTipo2.getSelectedItem());
                 tipo2 = String.valueOf(tipo2).substring(24, tipo2.length() - 4);
-                try {
-                    ComprobacionDebilidades(tipo1, tipo2);
-                } catch (IOException ex) {
-                    Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+                if (tipo1.compareTo(tipo2) != 0) {
+                    try {
+                        ComprobacionDebilidades(tipo1, tipo2);
+                    } catch (IOException ex) {
+                        Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "¡Un pokémon no puede tener 2 veces el mismo tipo!");
+                    ComboTipo2.setSelectedIndex(0);
                 }
             }
         });

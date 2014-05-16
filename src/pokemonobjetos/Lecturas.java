@@ -85,11 +85,11 @@ public class Lecturas {
         while ((linea = lectura.readLine()) != null) {
             campo = linea.split("\t");
             if (i == 28) {
-                pokemon = new Pokemon((i + 1), "Nidoran ♀", 1000 + ((Double.parseDouble(campo[1]) / 714) * 1057), Double.parseDouble(campo[2]), Double.parseDouble(campo[3]), Double.parseDouble(campo[4]), Double.parseDouble(campo[5]), Double.parseDouble(campo[6]), Double.parseDouble(campo[7]), campo[8], campo[9], campo[10], campo[11], campo[12], campo[13]);
+                pokemon = new Pokemon((i + 1), "Nidoran ♀", 200 + ((Double.parseDouble(campo[1]) / 714) * 1057), Double.parseDouble(campo[2]), Double.parseDouble(campo[3]), Double.parseDouble(campo[4]), Double.parseDouble(campo[5]), Double.parseDouble(campo[6]), Double.parseDouble(campo[7]), campo[8], campo[9], campo[10], campo[11], campo[12], campo[13]);
             } else if (i == 31) {
-                pokemon = new Pokemon((i + 1), "Nidoran ♂", 1000 + ((Double.parseDouble(campo[1]) / 714) * 1057), Double.parseDouble(campo[2]), Double.parseDouble(campo[3]), Double.parseDouble(campo[4]), Double.parseDouble(campo[5]), Double.parseDouble(campo[6]), Double.parseDouble(campo[7]), campo[8], campo[9], campo[10], campo[11], campo[12], campo[13]);
+                pokemon = new Pokemon((i + 1), "Nidoran ♂", 200 + ((Double.parseDouble(campo[1]) / 714) * 1057), Double.parseDouble(campo[2]), Double.parseDouble(campo[3]), Double.parseDouble(campo[4]), Double.parseDouble(campo[5]), Double.parseDouble(campo[6]), Double.parseDouble(campo[7]), campo[8], campo[9], campo[10], campo[11], campo[12], campo[13]);
             } else {
-                pokemon = new Pokemon((i + 1), campo[0], 1000 + ((Double.parseDouble(campo[1]) / 714) * 1057), Double.parseDouble(campo[2]), Double.parseDouble(campo[3]), Double.parseDouble(campo[4]), Double.parseDouble(campo[5]), Double.parseDouble(campo[6]), Double.parseDouble(campo[7]), campo[8], campo[9], campo[10], campo[11], campo[12], campo[13]);
+                pokemon = new Pokemon((i + 1), campo[0], 200 + ((Double.parseDouble(campo[1]) / 714) * 1057), Double.parseDouble(campo[2]), Double.parseDouble(campo[3]), Double.parseDouble(campo[4]), Double.parseDouble(campo[5]), Double.parseDouble(campo[6]), Double.parseDouble(campo[7]), campo[8], campo[9], campo[10], campo[11], campo[12], campo[13]);
             }
             bd.store(pokemon);
             i++;

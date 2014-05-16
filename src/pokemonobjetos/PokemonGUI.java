@@ -59,7 +59,8 @@ public class PokemonGUI extends JFrame {
     private static boolean menuelegirpokemon, menuinicial;
     public static boolean cambiarpokemon = true, atacaiaporcambiarpokemonjugador = false, cambiapokemonIAmuerto = false;
     private static Pokemon[] pokemon;
-    public static JPanelConFondo panelcombate;
+    public static JPanelCombate panelcombate;
+    public static JPanelFondo panelfondo;
     public static int pokemonencombatejugador, pokemonencombateIA;
     public static int ataqueusadojugador, ataqueusadoIA;
     public static int ronda = 1;
@@ -88,6 +89,9 @@ public class PokemonGUI extends JFrame {
         setResizable(false);
         setLayout(null);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        panelfondo = new JPanelFondo("Combate.png");
+        panelfondo.setBounds(0, 0, getWidth(), getHeight());
+        setContentPane(panelfondo);
         setIconImage(new ImageIcon(getClass().getResource("Icono/Pokeball.png")).getImage());
         Centrar(this);
         ListenerVentana();
@@ -882,6 +886,8 @@ public class PokemonGUI extends JFrame {
         panelcaracteristicas.add(ppataque4);
 
         panelcaracteristicas.add(panelestadisticas);
+        panelestadisticas.setOpaque(false);
+        panelcaracteristicas.setOpaque(false);
         add(panelcaracteristicas);
         botonelegirpokemon = new JButton[Lecturas.NumeroRegistros(fpokemon)];
         tipo1 = new JLabel[Lecturas.NumeroRegistros(fpokemon)];
@@ -1122,7 +1128,8 @@ public class PokemonGUI extends JFrame {
         add(scrollpokemonlista);
 
         contenedorpokemonsjugador.setLayout(null);
-        contenedorpokemonsjugador.setBounds(12, 39, 260, 530);
+        contenedorpokemonsjugador.setBounds(12, 39, 260, 510);
+        contenedorpokemonsjugador.setOpaque(false);
         //contenedorpokemonsjugador.setBackground(Color.red);
         add(contenedorpokemonsjugador);
 
@@ -1141,7 +1148,8 @@ public class PokemonGUI extends JFrame {
         lblsaludequipoIA = new JLabel[Juego.npokemonequipo];
         saludequipoIA = new JPanel[Juego.npokemonequipo];
         contenedorpokemonsIA.setLayout(null);
-        contenedorpokemonsIA.setBounds(1002, 39, 260, 530);
+        contenedorpokemonsIA.setBounds(1002, 39, 260, 510);
+        contenedorpokemonsIA.setOpaque(false);
         //contenedorpokemonsIA.setBackground(Color.green);
         add(contenedorpokemonsIA);
 
@@ -1487,6 +1495,8 @@ public class PokemonGUI extends JFrame {
 
         lblestadisticas[10].setText("Peso ");
         lblestadisticas[11].setText("" + pokemon[i].peso + " Kg");
+
+        panelestadisticas.setBackground(Color.green);
         AtaquePorCodigo(i);
     }
 
@@ -2488,7 +2498,7 @@ public class PokemonGUI extends JFrame {
         panelcombate = null;
         int n = (int) ((Math.random() * 11) + 1);
         //n = 11;
-        panelcombate = new JPanelConFondo(n + ".png");
+        panelcombate = new JPanelCombate(n + ".png");
         panelcombate.setBounds(276, 40, 721, 393);
         add(panelcombate);
         if (entrenadorliga == 1 && !Juego.repetircombate) {
@@ -2511,6 +2521,7 @@ public class PokemonGUI extends JFrame {
             contenedorlistapokemon.setVisible(false);
             scrollpokemonlista.setVisible(false);
             contenedorataques.setLayout(null);
+            contenedorataques.setOpaque(false);
             contenedorataques.setBounds(276, 550, 721, 300);
             //contenedorataques.setBackground(Color.green);
             add(contenedorataques);

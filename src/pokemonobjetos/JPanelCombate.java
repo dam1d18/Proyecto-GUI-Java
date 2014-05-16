@@ -7,7 +7,7 @@ import java.awt.RenderingHints;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class JPanelConFondo extends JPanel {
+public class JPanelCombate extends JPanel {
 
     public static int tiempo = 35;
     private Image imagenfondo;
@@ -17,7 +17,7 @@ public class JPanelConFondo extends JPanel {
     public static int contadorpaint;
     public static boolean equijugador;
 
-    public JPanelConFondo(String nombreImagen) {
+    public JPanelCombate(String nombreImagen) {
         setLayout(null);
         imagenfondo = new ImageIcon(getClass().getResource("Terrenos/" + nombreImagen)).getImage();
     }

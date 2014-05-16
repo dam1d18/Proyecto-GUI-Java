@@ -419,12 +419,12 @@ public class Pokemon {
                                         if (golpec == true) {
                                             if (golpe != 0) {
                                                 System.out.println(j1.nombre.trim() + " ha hecho un GOLPE CRÍTICO de " + (int) golpe + " de daño.");
-                                                str += j1.nombre + " ha hecho un GOLPE CRÍTICO de " + (int) golpe + " de daño.";
+                                                str += j1.nombre + " ha hecho un GOLPE CRÍTICO de " + (int) golpe + " de daño. ";
                                             }
                                         } else {
                                             if (golpe != 0) {
                                                 System.out.println(j1.nombre.trim() + " ha hecho un golpe de " + (int) golpe + " de daño.");
-                                                str += j1.nombre + " ha hecho un golpe de " + (int) golpe + " de daño.";
+                                                str += j1.nombre + " ha hecho un golpe de " + (int) golpe + " de daño. ";
                                             }
                                         }
                                         str += j1.Efecto(j1, j2, golpe, ataq.critico, ataqueelegido, tipoataque, equipo);
@@ -454,12 +454,12 @@ public class Pokemon {
                                         if (golpec == true) {
                                             if (golpe != 0) {
                                                 System.out.println(j1.nombre.trim() + " ha hecho un GOLPE CRÍTICO de " + (int) golpe + " de daño. ");
-                                                str += j1.nombre + " ha hecho un GOLPE CRÍTICO de " + (int) golpe + " de daño.";
+                                                str += j1.nombre + " ha hecho un GOLPE CRÍTICO de " + (int) golpe + " de daño. ";
                                             }
                                         } else {
                                             if (golpe != 0) {
                                                 System.out.println(j1.nombre.trim() + " ha hecho un golpe de " + (int) golpe + " de daño. ");
-                                                str += j1.nombre + " ha hecho un golpe de " + (int) golpe + " de daño.";
+                                                str += j1.nombre + " ha hecho un golpe de " + (int) golpe + " de daño. ";
                                             }
                                         }
                                         str += j1.Efecto(j1, j2, golpe, ataq.critico, ataqueelegido, tipoataque, equipo);
@@ -1223,15 +1223,31 @@ public class Pokemon {
                 }
                 break;
             case "Aromaterapia":
+                for (int j = 0; j < equipo.length; j++) {
+                    if (equipo[j].estado.compareTo("Debilitado") != 0 && equipo[j].estado.compareTo("Congelado") != 0 && equipo[j].estado.compareTo("Maldito") != 0 && equipo[j].estado.compareTo("Confuso") != 0 && equipo[j].estado.compareTo("Enamorado") != 0) {
+                        switch (equipo[j].estado) {
+                            case "Quemado":
+                                equipo[j].ataque += 40;
+                                break;
+                            case "Paralizado":
+                                equipo[j].velocidad = equipo[j].velocidad * 4;
+                                break;
+                            default:
+                                break;
+                        }
+                        equipo[j].estado = "Normal";
+                    }
+                }
+                break;
             case "Campana cura":
                 for (int j = 0; j < equipo.length; j++) {
                     if (equipo[j].estado.compareTo("Debilitado") != 0 && equipo[j].estado.compareTo("Maldito") != 0 && equipo[j].estado.compareTo("Confuso") != 0 && equipo[j].estado.compareTo("Enamorado") != 0) {
                         switch (equipo[j].estado) {
                             case "Quemado":
-                                equipo[j].velocidad = equipo[j].velocidad * 4;
+                                equipo[j].ataque += 40;
                                 break;
                             case "Paralizado":
-                                equipo[j].ataque +=40;
+                                equipo[j].velocidad = equipo[j].velocidad * 4;
                                 break;
                             default:
                                 break;

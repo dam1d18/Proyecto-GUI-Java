@@ -1,10 +1,10 @@
 package pokemonobjetos;
 
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
-import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 
 /**
@@ -253,7 +253,7 @@ public class AtaqueGrafico {
                 //No se mueve, solo se redimensiona
                 break;
             case "Rayo":
-                if (JPanelConFondo.contadorpaint == contadorrayo) {
+                if (JPanelCombate.contadorpaint == contadorrayo) {
                     if (movx) {
                         x += 6;
                     } else {

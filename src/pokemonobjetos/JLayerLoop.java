@@ -21,7 +21,7 @@ class JLayerLoop extends PlaybackListener implements Runnable {
         this.loop = loop;
     }
 
-    public void play() {/*
+    public void play() {
         try {
             String urlAsString = "file:///" + new java.io.File(".").getCanonicalPath() + "/Recursos/Audio/" + this.filePath;
 
@@ -37,11 +37,11 @@ class JLayerLoop extends PlaybackListener implements Runnable {
             this.playerThread.start();
         } catch (Exception ex) {
             ex.printStackTrace();
-        }*/
+        }
     }
 
-    public void stop() {/*
-        this.playerThread.stop();*/
+    public void stop() {
+        this.playerThread.stop();
     }
 
     // PlaybackListener members

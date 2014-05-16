@@ -353,10 +353,8 @@ public class PokemonGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String tipo1 = String.valueOf(ComboTipo1.getSelectedItem());
                 tipo1 = String.valueOf(tipo1).substring(24, tipo1.length() - 4);
-                System.out.println(tipo1);
                 String tipo2 = String.valueOf(ComboTipo2.getSelectedItem());
                 tipo2 = String.valueOf(tipo2).substring(24, tipo2.length() - 4);
-                System.out.println(tipo2);
                 if (tipo1.compareTo(tipo2) != 0) {
                     try {
                         ComprobacionDebilidades(tipo1, tipo2);
@@ -614,7 +612,7 @@ public class PokemonGUI extends JFrame {
                             Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Ningún Pokémon a logrado tamaña hazaña en Kanto");
+                        JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Kanto");
                     }
                 }
             }
@@ -647,7 +645,7 @@ public class PokemonGUI extends JFrame {
                             Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Ningún Pokémon a logrado tamaña hazaña en Johto");
+                        JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Johto");
                     }
                 }
             }
@@ -680,7 +678,7 @@ public class PokemonGUI extends JFrame {
                             Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Ningún Pokémon a logrado tamaña hazaña en Hoenn");
+                        JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Hoenn");
                     }
                 }
             }
@@ -713,7 +711,7 @@ public class PokemonGUI extends JFrame {
                             Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Ningún Pokémon a logrado tamaña hazaña en Sinnoh");
+                        JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Sinnoh");
                     }
                 }
             }
@@ -746,7 +744,7 @@ public class PokemonGUI extends JFrame {
                             Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Ningún Pokémon a logrado tamaña hazaña en Teselia");
+                        JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Teselia");
                     }
                 }
             }

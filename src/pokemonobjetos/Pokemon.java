@@ -3019,7 +3019,7 @@ public class Pokemon {
         if (PokemonGUI.kanto) {
             switch (n) {
                 case 1: //Brock
-                    ListaPokemon[0] = 287;//95;
+                    ListaPokemon[0] = 95;
                     ListaPokemon[1] = 141;
                     ListaPokemon[2] = 139;
                     ListaPokemon[3] = 76;

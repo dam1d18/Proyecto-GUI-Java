@@ -84,25 +84,24 @@ public class PokemonGUI extends JFrame {
     public static Ecualizador controladorsonido;
 
     public PokemonGUI() {
-        setSize(860, 503);
+        setSize(1280, 799);
         setVisible(true);
         setResizable(false);
         setLayout(null);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        panelfondo = new JPanelFondo("Combate.png");
+        panelfondo = new JPanelFondo();
+        panelfondo.CargarImagen("Intro.png");
         setContentPane(panelfondo);
         setIconImage(new ImageIcon(getClass().getResource("Icono/Pokeball.png")).getImage());
         Centrar(this);
         ListenerVentana();
         setCursor(cursormenus);
-        fototitulo.setBounds(1, 1, 851, 316);
-        fototitulo.setIcon(new ImageIcon("Recursos/Imagenes/Miscelanea/Portada.png"));
-        add(fototitulo);
         botoniniciarjuego = new JButton("Comenzar juego");
         add(botoniniciarjuego);
-        setSize(855, 502);
-        botoniniciarjuego.setBounds(350, 320, 150, 75);
+        setSize(1280, 800);
+        botoniniciarjuego.setBounds(550, 170, 150, 75);
         botoniniciarjuego.setFocusable(false);
+        botoniniciarjuego.setBackground(Color.LIGHT_GRAY);
         botoniniciarjuego.addActionListener(new ActionListener() {
 
             @Override
@@ -153,6 +152,7 @@ public class PokemonGUI extends JFrame {
     }
 
     public void MenuElegirModoJuego() {
+        panelfondo.CargarImagen("1.png");
         if (!volvermodojuego) {
             CrearEcualizador();
             sliderecualizador.setVisible(false);
@@ -160,25 +160,25 @@ public class PokemonGUI extends JFrame {
             fototitulo.setVisible(false);
             botoncarrera.setText("Modo Carrera");
             botoncarrera.setFocusable(false);
-            botoncarrera.setBounds(150, 10, 220, 50);
+            botoncarrera.setBounds(535, 350, 220, 50);
             add(botoncarrera);
 
-            botonhallfama.setBounds(150, 70, 220, 50);
+            botonhallfama.setBounds(535, 420, 220, 50);
             botonhallfama.setFocusable(false);
             botonhallfama.setText("Hall de la Fama");
             add(botonhallfama);
 
-            botoncombatelibre.setBounds(150, 130, 220, 50);
+            botoncombatelibre.setBounds(535, 490, 220, 50);
             botoncombatelibre.setFocusable(false);
             botoncombatelibre.setText("Combate Libre");
             add(botoncombatelibre);
 
-            botonestadisticasmodolibre.setBounds(150, 190, 220, 50);
+            botonestadisticasmodolibre.setBounds(535, 560, 220, 50);
             botonestadisticasmodolibre.setFocusable(false);
             botonestadisticasmodolibre.setText("Victorias Modo Libre");
             add(botonestadisticasmodolibre);
 
-            botontablatipos.setBounds(150, 250, 220, 50);
+            botontablatipos.setBounds(535, 630, 220, 50);
             botontablatipos.setFocusable(false);
             botontablatipos.setText("Tabla de Tipos");
             add(botontablatipos);
@@ -251,7 +251,8 @@ public class PokemonGUI extends JFrame {
             botonestadisticasmodolibre.setVisible(true);
             botontablatipos.setVisible(true);
         }
-        setSize(540, 350);
+        setSize(1280, 801);
+        setSize(1280, 800);
         Centrar(this);
         volvermodojuego = true;
     }
@@ -805,6 +806,7 @@ public class PokemonGUI extends JFrame {
     }
 
     public void ElegirPokemons() throws IOException {
+        panelfondo.CargarImagen("ElegirPokemon.png");
         MusicIntro.stop();
         MusicMenus = new JLayerLoop("Menus.mp3", true);
         MusicMenus.play();
@@ -1759,6 +1761,7 @@ public class PokemonGUI extends JFrame {
     }
 
     public void MenuLideres() {
+        panelfondo.CargarImagen("Lideres.png");
         sliderecualizador.setVisible(true);
         if (entrenadorliga == 1 && !Juego.repetircombate) {
             MusicMenus.stop();
@@ -1894,6 +1897,7 @@ public class PokemonGUI extends JFrame {
     }
 
     public void MenuAltoMando() {
+        panelfondo.CargarImagen("AltoMando.png");
         contenedorpokemonsjugador.setVisible(false);
         contenedorpokemonsIA.setVisible(false);
         panelcombate.setVisible(false);
@@ -2477,6 +2481,7 @@ public class PokemonGUI extends JFrame {
     }
 
     public void IniciarCombate() {
+        panelfondo.CargarImagen("Combate.png");
         iniciocombate = true;
         pokemonencombatejugador = 7;
         if (modocarrera) {

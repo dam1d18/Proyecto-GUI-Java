@@ -9,8 +9,11 @@ public class JPanelFondo extends JPanel {
 
     private Image imagenfondo;
 
-    public JPanelFondo(String nombreImagen) {
+    public JPanelFondo() {
         setLayout(null);
+    }
+
+    public void CargarImagen(String nombreImagen) {
         imagenfondo = new ImageIcon(getClass().getResource("Fondos/" + nombreImagen)).getImage();
     }
 

@@ -21,6 +21,8 @@ import static pokemonobjetos.Lecturas.*;
  */
 public class PokemonGUI extends JFrame {
 
+    static int ancho = 1280;
+    static int alto = 850;//850;
     static ObjectContainer bdpokemon;
     static ObjectContainer bdataque;
     public static JButton botoniniciarjuego, botoncambiarpokemon, botoncarrera = new JButton(), botoncombatelibre = new JButton(), botonKanto, botonJohto, botonHoenn, botonSinnoh, botonTeselia, botonsiguienteentrenador = new JButton(),
@@ -98,7 +100,7 @@ public class PokemonGUI extends JFrame {
         setCursor(cursormenus);
         botoniniciarjuego = new JButton("Comenzar juego");
         add(botoniniciarjuego);
-        setSize(1280, 800);
+        setSize(ancho, alto);
         botoniniciarjuego.setBounds(550, 170, 150, 75);
         botoniniciarjuego.setFocusable(false);
         botoniniciarjuego.setBackground(Color.LIGHT_GRAY);
@@ -251,8 +253,8 @@ public class PokemonGUI extends JFrame {
             botonestadisticasmodolibre.setVisible(true);
             botontablatipos.setVisible(true);
         }
-        setSize(1280, 801);
-        setSize(1280, 800);
+        setSize(ancho, alto + 1);
+        setSize(ancho, alto);
         Centrar(this);
         volvermodojuego = true;
     }
@@ -2508,8 +2510,7 @@ public class PokemonGUI extends JFrame {
         if (entrenadorliga == 1 && !Juego.repetircombate) {
             menuelegirpokemon = false;
             //primo
-            setSize(1280, 850);
-            //setSize(1280, 768);
+            setSize(ancho, alto);
 
             labelnombreentrenadorjugador.setBounds(50, 20, 70, 20);
             labelnombreentrenadorjugador.setText("Jugador");
@@ -3014,7 +3015,7 @@ public class PokemonGUI extends JFrame {
             MusicHallFama = new JLayerLoop("HallFama/HallFama.mp3", true);
             MusicHallFama.play();
         }
-        setSize(1280, 860);
+        setSize(ancho, alto);
         Centrar(this);
         if (!volverhallfama) {
             fotohallfama.setBounds(510, 5, 251, 121);

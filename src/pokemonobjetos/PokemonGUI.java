@@ -69,7 +69,7 @@ public class PokemonGUI extends JFrame {
     public static int probabilidadshiny = 15;
     public static int tiempo = 4;
     public static boolean modocarrera, kanto = false, johto = false, hoenn = false, sinnoh = false, teselia = false,
-            listeneratacar = false, iniciocombate = true, volvermodojuego = false, volverpanel = false,
+            listeneratacar = false, iniciocombate = true, volvermodojuego = false, volvertablatipos = false, volverelegirgeneracion = false,
             volverhallfama = false, volverestadisticas = false;
     private JComboBox ComboTipo1, ComboTipo2;
     public static int entrenadorliga = 1;
@@ -189,6 +189,10 @@ public class PokemonGUI extends JFrame {
 
                 public void actionPerformed(ActionEvent e) {
                     modocarrera = true;
+                    botoncarrera.setVisible(false);
+                    botonhallfama.setVisible(false);
+                    botoncombatelibre.setVisible(false);
+                    botonestadisticasmodolibre.setVisible(false);
                     MenuElegirGeneracion();
                 }
             });
@@ -253,14 +257,14 @@ public class PokemonGUI extends JFrame {
             botonestadisticasmodolibre.setVisible(true);
             botontablatipos.setVisible(true);
         }
-        setSize(ancho, alto + 1);
-        setSize(ancho, alto);
+        setSize(ancho, 769);
+        setSize(ancho, 768);
         Centrar(this);
         volvermodojuego = true;
     }
 
     public void TablaTipos() {
-        if (!volverpanel) {
+        if (!volvertablatipos) {
             paneltipos.setBounds(6, 10, 700, 665);
             paneltipos.setVisible(true);
             paneltipos.setIcon(new ImageIcon("Recursos/Imagenes/Tipos/Tabla.png"));
@@ -341,6 +345,46 @@ public class PokemonGUI extends JFrame {
                 lblmultiplicador[i].setBounds(75, 37 * i, 30, 31);
                 paneltiposcalculo.add(lblmultiplicador[i]);
             }
+            ComboTipo1.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String tipo1 = String.valueOf(ComboTipo1.getSelectedItem());
+                    tipo1 = String.valueOf(tipo1).substring(24, tipo1.length() - 4);
+                    String tipo2 = String.valueOf(ComboTipo2.getSelectedItem());
+                    tipo2 = String.valueOf(tipo2).substring(24, tipo2.length() - 4);
+                    if (tipo1.compareTo(tipo2) != 0) {
+                        try {
+                            ComprobacionDebilidades(tipo1, tipo2);
+                        } catch (IOException ex) {
+                            Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡Un pokémon no puede tener 2 veces el mismo tipo!");
+                        ComboTipo2.setSelectedIndex(0);
+                    }
+                }
+            });
+            ComboTipo2.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String tipo1 = String.valueOf(ComboTipo1.getSelectedItem());
+                    tipo1 = String.valueOf(tipo1).substring(24, tipo1.length() - 4);
+                    String tipo2 = String.valueOf(ComboTipo2.getSelectedItem());
+                    tipo2 = String.valueOf(tipo2).substring(24, tipo2.length() - 4);
+                    if (tipo1.compareTo(tipo2) != 0) {
+                        try {
+                            ComprobacionDebilidades(tipo1, tipo2);
+                        } catch (IOException ex) {
+                            Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡Un pokémon no puede tener 2 veces el mismo tipo!");
+                        ComboTipo2.setSelectedIndex(0);
+                    }
+                }
+            });
         } else {
             paneltipos.setVisible(true);
             botonvolveratrasdesdetabla.setVisible(true);
@@ -353,48 +397,7 @@ public class PokemonGUI extends JFrame {
         }
         setSize(1040, 768);
         Centrar(this);
-        ComboTipo1.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String tipo1 = String.valueOf(ComboTipo1.getSelectedItem());
-                tipo1 = String.valueOf(tipo1).substring(24, tipo1.length() - 4);
-                String tipo2 = String.valueOf(ComboTipo2.getSelectedItem());
-                tipo2 = String.valueOf(tipo2).substring(24, tipo2.length() - 4);
-                if (tipo1.compareTo(tipo2) != 0) {
-                    try {
-                        ComprobacionDebilidades(tipo1, tipo2);
-                    } catch (IOException ex) {
-                        Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "¡Un pokémon no puede tener 2 veces el mismo tipo!");
-                    ComboTipo2.setSelectedIndex(0);
-                }
-            }
-        });
-        ComboTipo2.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String tipo1 = String.valueOf(ComboTipo1.getSelectedItem());
-                tipo1 = String.valueOf(tipo1).substring(24, tipo1.length() - 4);
-                String tipo2 = String.valueOf(ComboTipo2.getSelectedItem());
-                tipo2 = String.valueOf(tipo2).substring(24, tipo2.length() - 4);
-                if (tipo1.compareTo(tipo2) != 0) {
-                    try {
-                        ComprobacionDebilidades(tipo1, tipo2);
-                    } catch (IOException ex) {
-                        Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "¡Un pokémon no puede tener 2 veces el mismo tipo!");
-                    ComboTipo2.setSelectedIndex(0);
-                }
-            }
-        });
-
-        volverpanel = true;
+        volvertablatipos = true;
     }
 
     public void ComprobacionDebilidades(String tipo1, String tipo2) throws IOException {
@@ -547,214 +550,238 @@ public class PokemonGUI extends JFrame {
     }
 
     public void MenuElegirGeneracion() {
-        setSize(610, 300);
-        Centrar(this);
         kanto = false;
         johto = false;
         hoenn = false;
+        sinnoh = false;
+        teselia = false;
 
-        botoncarrera.setVisible(false);
-        botonhallfama.setVisible(false);
-        botoncombatelibre.setVisible(false);
-        botonestadisticasmodolibre.setVisible(false);
-        botontablatipos.setVisible(false);
-        botonKanto = new JButton();
-        botonKanto.setBounds(150, 10, 270, 40);
-        botonKanto.setFocusable(false);
-        botonKanto.setText("Kanto");
-        add(botonKanto);
+        if (!volverelegirgeneracion) {
+            botonKanto = new JButton();
+            botonKanto.setBounds(150, 10, 270, 40);
+            botonKanto.setFocusable(false);
+            botonKanto.setText("Kanto");
+            add(botonKanto);
 
-        botonJohto = new JButton();
-        botonJohto.setBounds(150, 60, 270, 40);
-        botonJohto.setFocusable(false);
+            botonJohto = new JButton();
+            botonJohto.setBounds(150, 60, 270, 40);
+            botonJohto.setFocusable(false);
+            botonJohto.setText("Johto");
+            add(botonJohto);
 
-        botonJohto.setText("Johto");
-        add(botonJohto);
-        botonHoenn = new JButton();
-        botonHoenn.setBounds(150, 110, 270, 40);
-        botonHoenn.setFocusable(false);
+            botonHoenn = new JButton();
+            botonHoenn.setBounds(150, 110, 270, 40);
+            botonHoenn.setFocusable(false);
+            botonHoenn.setText("Hoenn");
+            add(botonHoenn);
 
-        botonHoenn.setText("Hoenn");
-        add(botonHoenn);
-        botonSinnoh = new JButton();
-        botonSinnoh.setBounds(150, 160, 270, 40);
-        botonSinnoh.setFocusable(false);
+            botonSinnoh = new JButton();
+            botonSinnoh.setBounds(150, 160, 270, 40);
+            botonSinnoh.setFocusable(false);
+            botonSinnoh.setText("Sinnoh");
+            add(botonSinnoh);
 
-        botonSinnoh.setText("Sinnoh");
-        add(botonSinnoh);
-        botonTeselia = new JButton();
-        botonTeselia.setBounds(150, 210, 270, 40);
-        botonTeselia.setFocusable(false);
+            botonTeselia = new JButton();
+            botonTeselia.setBounds(150, 210, 270, 40);
+            botonTeselia.setFocusable(false);
+            botonTeselia.setText("Teselia");
+            add(botonTeselia);
 
-        botonTeselia.setText("Teselia");
-        add(botonTeselia);
-        tipocombate = 3;
-        Juego.CrearEquipos();
-        botonKanto.addActionListener(new ActionListener() {
+            botonvolveratrasdesdehallfama.setBounds(150, 260, 270, 40);
+            botonvolveratrasdesdehallfama.setText("Volver atrás");
+            botonvolveratrasdesdehallfama.setFocusable(false);
+            add(botonvolveratrasdesdehallfama);
+            botonvolveratrasdesdehallfama.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
-                kanto = true;
-                johto = false;
-                hoenn = false;
-                sinnoh = false;
-                teselia = false;
-                if (!menuinicial) {
-                    try {
-                        ElegirPokemons();
-                    } catch (IOException ex) {
-                        Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    File dir = new File(Lecturas.fhallfamaKanto);
-                    if (dir.exists()) {
-                        botonKanto.setVisible(false);
-                        botonJohto.setVisible(false);
-                        botonHoenn.setVisible(false);
-                        botonSinnoh.setVisible(false);
-                        botonTeselia.setVisible(false);
+                public void actionPerformed(ActionEvent e) {
+                    botonKanto.setVisible(false);
+                    botonJohto.setVisible(false);
+                    botonHoenn.setVisible(false);
+                    botonSinnoh.setVisible(false);
+                    botonTeselia.setVisible(false);
+                    botonvolveratrasdesdehallfama.setVisible(false);
+                    MenuElegirModoJuego();
+                }
+            });
+            tipocombate = 3;
+
+            Juego.CrearEquipos();
+            botonKanto.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+                    kanto = true;
+                    johto = false;
+                    hoenn = false;
+                    sinnoh = false;
+                    teselia = false;
+                    if (!menuinicial) {
                         try {
-                            MenuHallFama();
+                            ElegirPokemons();
                         } catch (IOException ex) {
                             Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Kanto");
+                        File dir = new File(Lecturas.fhallfamaKanto);
+                        if (dir.exists()) {
+                            botonKanto.setVisible(false);
+                            botonJohto.setVisible(false);
+                            botonHoenn.setVisible(false);
+                            botonSinnoh.setVisible(false);
+                            botonTeselia.setVisible(false);
+                            try {
+                                MenuHallFama();
+                            } catch (IOException ex) {
+                                Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Kanto");
+                        }
                     }
                 }
-            }
-        });
-        botonJohto.addActionListener(new ActionListener() {
+            });
+            botonJohto.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
-                kanto = false;
-                johto = true;
-                hoenn = false;
-                sinnoh = false;
-                teselia = false;
-                if (!menuinicial) {
-                    try {
-                        ElegirPokemons();
-                    } catch (IOException ex) {
-                        Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    File dir = new File(Lecturas.fhallfamaJohto);
-                    if (dir.exists()) {
-                        botonKanto.setVisible(false);
-                        botonJohto.setVisible(false);
-                        botonHoenn.setVisible(false);
-                        botonSinnoh.setVisible(false);
-                        botonTeselia.setVisible(false);
+                public void actionPerformed(ActionEvent e) {
+                    kanto = false;
+                    johto = true;
+                    hoenn = false;
+                    sinnoh = false;
+                    teselia = false;
+                    if (!menuinicial) {
                         try {
-                            MenuHallFama();
+                            ElegirPokemons();
                         } catch (IOException ex) {
                             Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Johto");
+                        File dir = new File(Lecturas.fhallfamaJohto);
+                        if (dir.exists()) {
+                            botonKanto.setVisible(false);
+                            botonJohto.setVisible(false);
+                            botonHoenn.setVisible(false);
+                            botonSinnoh.setVisible(false);
+                            botonTeselia.setVisible(false);
+                            try {
+                                MenuHallFama();
+                            } catch (IOException ex) {
+                                Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Johto");
+                        }
                     }
                 }
-            }
-        });
-        botonHoenn.addActionListener(new ActionListener() {
+            });
+            botonHoenn.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
-                kanto = false;
-                johto = false;
-                hoenn = true;
-                sinnoh = false;
-                teselia = false;
-                if (!menuinicial) {
-                    try {
-                        ElegirPokemons();
-                    } catch (IOException ex) {
-                        Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    File dir = new File(Lecturas.fhallfamaHoenn);
-                    if (dir.exists()) {
-                        botonKanto.setVisible(false);
-                        botonJohto.setVisible(false);
-                        botonHoenn.setVisible(false);
-                        botonSinnoh.setVisible(false);
-                        botonTeselia.setVisible(false);
+                public void actionPerformed(ActionEvent e) {
+                    kanto = false;
+                    johto = false;
+                    hoenn = true;
+                    sinnoh = false;
+                    teselia = false;
+                    if (!menuinicial) {
                         try {
-                            MenuHallFama();
+                            ElegirPokemons();
                         } catch (IOException ex) {
                             Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Hoenn");
+                        File dir = new File(Lecturas.fhallfamaHoenn);
+                        if (dir.exists()) {
+                            botonKanto.setVisible(false);
+                            botonJohto.setVisible(false);
+                            botonHoenn.setVisible(false);
+                            botonSinnoh.setVisible(false);
+                            botonTeselia.setVisible(false);
+                            try {
+                                MenuHallFama();
+                            } catch (IOException ex) {
+                                Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Hoenn");
+                        }
                     }
                 }
-            }
-        });
-        botonSinnoh.addActionListener(new ActionListener() {
+            });
+            botonSinnoh.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
-                kanto = false;
-                johto = false;
-                hoenn = false;
-                sinnoh = true;
-                teselia = false;
-                if (!menuinicial) {
-                    try {
-                        ElegirPokemons();
-                    } catch (IOException ex) {
-                        Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    File dir = new File(Lecturas.fhallfamaSinnoh);
-                    if (dir.exists()) {
-                        botonKanto.setVisible(false);
-                        botonJohto.setVisible(false);
-                        botonHoenn.setVisible(false);
-                        botonSinnoh.setVisible(false);
-                        botonTeselia.setVisible(false);
+                public void actionPerformed(ActionEvent e) {
+                    kanto = false;
+                    johto = false;
+                    hoenn = false;
+                    sinnoh = true;
+                    teselia = false;
+                    if (!menuinicial) {
                         try {
-                            MenuHallFama();
+                            ElegirPokemons();
                         } catch (IOException ex) {
                             Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Sinnoh");
+                        File dir = new File(Lecturas.fhallfamaSinnoh);
+                        if (dir.exists()) {
+                            botonKanto.setVisible(false);
+                            botonJohto.setVisible(false);
+                            botonHoenn.setVisible(false);
+                            botonSinnoh.setVisible(false);
+                            botonTeselia.setVisible(false);
+                            try {
+                                MenuHallFama();
+                            } catch (IOException ex) {
+                                Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Sinnoh");
+                        }
                     }
                 }
-            }
-        });
-        botonTeselia.addActionListener(new ActionListener() {
+            });
+            botonTeselia.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
-                kanto = false;
-                johto = false;
-                hoenn = false;
-                sinnoh = false;
-                teselia = true;
-                if (!menuinicial) {
-                    try {
-                        ElegirPokemons();
-                    } catch (IOException ex) {
-                        Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    File dir = new File(Lecturas.fhallfamaTeselia);
-                    if (dir.exists()) {
-                        botonKanto.setVisible(false);
-                        botonJohto.setVisible(false);
-                        botonHoenn.setVisible(false);
-                        botonSinnoh.setVisible(false);
-                        botonTeselia.setVisible(false);
+                public void actionPerformed(ActionEvent e) {
+                    kanto = false;
+                    johto = false;
+                    hoenn = false;
+                    sinnoh = false;
+                    teselia = true;
+                    if (!menuinicial) {
                         try {
-                            MenuHallFama();
+                            ElegirPokemons();
                         } catch (IOException ex) {
                             Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Teselia");
+                        File dir = new File(Lecturas.fhallfamaTeselia);
+                        if (dir.exists()) {
+                            botonKanto.setVisible(false);
+                            botonJohto.setVisible(false);
+                            botonHoenn.setVisible(false);
+                            botonSinnoh.setVisible(false);
+                            botonTeselia.setVisible(false);
+                            try {
+                                MenuHallFama();
+                            } catch (IOException ex) {
+                                Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Ningún Pokémon ha logrado tamaña hazaña en Teselia");
+                        }
                     }
                 }
-            }
-        });
+            });
+            volverelegirgeneracion = true;
+        } else {
+            botonKanto.setVisible(true);
+            botonJohto.setVisible(true);
+            botonHoenn.setVisible(true);
+            botonSinnoh.setVisible(true);
+            botonTeselia.setVisible(true);
+            botonvolveratrasdesdehallfama.setVisible(true);
+        }
+        setSize(810, 500);
+        Centrar(this);
     }
 
     public String[] TipoCombate() {
@@ -3087,8 +3114,8 @@ public class PokemonGUI extends JFrame {
             scrolllistaestadisticas.getVerticalScrollBar().setUnitIncrement(28);
             scrolllistaestadisticas.setBounds(20, 139, 1240, 640);
             add(scrolllistaestadisticas);
+            volverhallfama = true;
         }
-        volverhallfama = false;
     }
 
     public void Centrar(Window frame) {

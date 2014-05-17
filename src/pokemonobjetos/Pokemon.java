@@ -1413,6 +1413,7 @@ public class Pokemon {
             case "Come suenos":
             case "Puno drenaje":
             case "Asta drenaje":
+            case "Carga parabola":
                 calculo = 0.5 * golpes;
                 if (this.salud + calculo <= this.saludmax) {
                     this.salud += calculo;
@@ -1464,6 +1465,7 @@ public class Pokemon {
                 }
                 break;
             case "Testarazo":
+            case "Luz aniquiladora":
                 calculo = 0.5 * golpes;
                 if (this.salud - calculo > 0) {
                     this.salud -= calculo;
@@ -2073,6 +2075,19 @@ public class Pokemon {
                 }
 
                 break;
+            case "Tormenta de diamantes":
+                if (Math.random() * 100 < 50) {
+                    if (this.defensa + 40 < defensamax) {
+                        j1.defensa += 40;
+                        System.out.println(j1.nombre.trim() + " aumentó su defensa.");
+                        str += j1.nombre.trim() + " aumentó su defensa.";
+                    } else {
+                        j1.defensa = defensamax;
+                        System.out.println(j1.nombre.trim() + " no puede aumentar más su defensa.");
+                        str += j1.nombre.trim() + " no puede aumentar más su defensa.";
+                    }
+                }
+                break;
             case "Cosquillas":
                 if (j1.ataque - 20 > ataquemin) {
                     j1.ataque += 20;
@@ -2214,20 +2229,26 @@ public class Pokemon {
             case "Viento plata":
             case "Viento aciago":
                 if (Math.random() * 100 < 10) {
+                    String st = "";
                     if (this.ataque + 20 < ataquemax) {
                         j1.ataque += 20;
                         System.out.print(j1.nombre.trim() + " aumentó su ataque y");
+                        st += j1.nombre.trim() + " aumentó su ataque y";
                     } else {
                         j1.ataque = ataquemax;
                         System.out.print(j1.nombre.trim() + " no puede aumentar más su ataque y");
+                        st += j1.nombre.trim() + " no puede aumentar más su ataque y";
                     }
                     if (this.defensa + 40 < defensamax) {
                         j1.defensa += 40;
                         System.out.println(j1.nombre.trim() + " aumentó su defensa.");
+                        st += j1.nombre.trim() + " aumentó su defensa.";
                     } else {
                         j1.defensa = defensamax;
                         System.out.println(j1.nombre.trim() + " no puede aumentar más su defensa.");
+                        st += j1.nombre.trim() + " no puede aumentar más su defensa.";
                     }
+                    str += st;
                 }
                 break;
             case "Enrosque":

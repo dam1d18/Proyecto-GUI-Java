@@ -22,7 +22,7 @@ import static pokemonobjetos.Lecturas.*;
 public class PokemonGUI extends JFrame {
 
     static int ancho = 1280;
-    static int alto = 768;//850;
+    static int alto = 850;//850;
     static ObjectContainer bdpokemon;
     static ObjectContainer bdataque;
     public static JButton botoniniciarjuego, botoncambiarpokemon, botoncarrera = new JButton(), botoncombatelibre = new JButton(), botonKanto, botonJohto, botonHoenn, botonSinnoh, botonTeselia, botonsiguienteentrenador = new JButton(),
@@ -3007,6 +3007,7 @@ public class PokemonGUI extends JFrame {
                         fotohallfama.setVisible(false);
                         botonvolveratrasdesdeestadisticas.setVisible(false);
                         MusicHallFama.stop();
+                        MusicIntro.play();
                         MenuElegirModoJuego();
                     }
                 });
@@ -3112,7 +3113,7 @@ public class PokemonGUI extends JFrame {
                         fotohallfama.setVisible(false);
                         botonvolveratrasdesdehallfama.setVisible(false);
                         MusicHallFama.stop();
-
+                        MusicIntro.play();
                         MenuElegirGeneracion();
                     }
                 });

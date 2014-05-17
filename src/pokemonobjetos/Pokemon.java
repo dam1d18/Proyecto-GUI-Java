@@ -408,6 +408,11 @@ public class Pokemon {
                                 if (ataq.nombre.compareTo("Liofilizacion") == 0 && (j2.tipo1.compareTo("Agua") == 0 || j2.tipo2.compareTo("Agua") == 0)) {
                                     n++;
                                 }
+                                if (ataq.nombre.compareTo("Explosion") == 0 || ataq.nombre.compareTo("Autodestruccion") == 0) {
+                                    if (n == 0) {
+                                        n = 3;
+                                    }
+                                }
                                 switch (n) {
                                     case 0:
                                         System.out.println(j2.nombre.trim() + " no se ve afectado por " + j1.ataqueelegido.trim() + ".");

@@ -722,7 +722,7 @@ public class Pokemon {
             case "Guillotina":
             case "Frio polar":
             case "Perforador":
-                if (Math.random() * 100 <= 15) {
+                if (Math.random() * 100 <= 30) {
                     System.out.println(ataqueelegido.trim() + " de " + this.nombre.trim() + " fue letal, ha realizado " + (int) j2.salud + " de daño.");
                     str += ataqueelegido.trim() + " de " + this.nombre.trim() + " fue letal, ha realizado " + (int) j2.salud + " de daño.";
                     golpe = j2.salud;
@@ -1419,8 +1419,18 @@ public class Pokemon {
                 } else {
                     this.salud = this.saludmax;
                 }
-                System.out.println(this.nombre.trim() + " absorbió " + (int) calculo + " de salud de los sueños de " + j2.nombre.trim() + ".");
-                str += this.nombre.trim() + " absorbió " + (int) calculo + " de salud de los sueños de " + j2.nombre.trim() + ".";
+                System.out.println(this.nombre.trim() + " absorbió " + (int) calculo + " de salud de " + j2.nombre.trim() + ".");
+                str += this.nombre.trim() + " absorbió " + (int) calculo + " de salud de " + j2.nombre.trim() + ".";
+                break;
+            case "Beso drenaje":
+                calculo = 0.75 * golpes;
+                if (this.salud + calculo <= this.saludmax) {
+                    this.salud += calculo;
+                } else {
+                    this.salud = this.saludmax;
+                }
+                System.out.println(this.nombre.trim() + " absorbió " + (int) calculo + " de salud.");
+                str += this.nombre.trim() + " absorbió " + (int) calculo + " de salud.";
                 break;
             case "Doble filo":
             case "Derribo":
@@ -1508,7 +1518,7 @@ public class Pokemon {
                     System.out.println(ataqueelegido.trim() + " ha fallado.");
                     str += ataqueelegido.trim() + " ha fallado.";
                 } else {
-                    calculo = j1.saludmax / 7;
+                    calculo = j1.saludmax / 3;
                     if (j1.salud + calculo <= j1.saludmax) {
                         j1.salud += calculo;
                         System.out.println(j1.nombre.trim() + " se curó con " + ataqueelegido.trim() + " " + (int) calculo + " de salud.");
@@ -1831,6 +1841,7 @@ public class Pokemon {
             case "Ataque oseo":
             case "Ataque furia":
             case "Plumerazo":
+            case "Shuriken de agua":
                 numataques = (int) ((Math.random() * 4) + 2);
                 for (i = 0; i < numataques; i++) {
                     if (Math.random() * 100 > 85) {
@@ -1992,6 +2003,7 @@ public class Pokemon {
                 break;
             case "Estoicismo":
             case "Alarido":
+            case "Llama embrujada":
                 calculo = j2.ataqueesp - 20;
                 if (calculo > ataqueespmin) {
                     j2.ataqueesp -= 20;

@@ -102,6 +102,7 @@ public class Ataque {
             case "Golpe bajo":
             case "Velocidad extrema":
             case "Ojitos tiernos":
+            case "Shuriken de agua":
                 System.out.print(j1.nombre.trim() + " ataca primero, ");
                 j1.prioridad = true;
                 break;

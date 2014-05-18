@@ -76,8 +76,8 @@ public class AtaqueGrafico {
                     alto = maxanchoaltoJugador;
                 } else {
                     equijugador = false;
-                    x = 520;
-                    y = 150;
+                    x = 490;
+                    y = 130;
                     ancho = 50;
                     alto = 50;
                 }

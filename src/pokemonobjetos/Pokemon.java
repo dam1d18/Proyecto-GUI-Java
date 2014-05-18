@@ -769,9 +769,10 @@ public class Pokemon {
                 }
                 break;
             case "Descanso":
-                if (!j2.protegeestado) {
+                if (!j1.protegeestado) {
                     j1.estado = "Dormido";
-                    j2.contador = 10;
+                    j1.contador = 10;
+                    j1.salud = j1.saludmax;
                     str += j1.nombre + " se echó a dormir y recuperó toda su vitalidad.";
                 } else {
                     str += j1.nombre + " intentó echarse a dormir pero no pudo debido a su protección contra problemas de estado.";
@@ -952,6 +953,9 @@ public class Pokemon {
     }
 
     void DevolverEstadisticasBase(Pokemon j1, Pokemon j2, Ataque[] ataquesj1) {
+        if (j2.Vivo() && j1.nombre.trim().compareTo("Kecleon") == 0) {
+            j1.estado = "Normal";
+        }
         if (j2.Vivo() && j1.nombre.trim().compareTo("Ditto") == 0 && j1.codigo != 132) {
             j1.ataque1 = String.valueOf(195);
             j1.ataque2 = String.valueOf(195);
@@ -979,9 +983,8 @@ public class Pokemon {
             ataquesj1[1].pp = ataque2ppditto;
             ataquesj1[2].pp = ataque3ppditto;
             ataquesj1[3].pp = ataque4ppditto;
-        }
-        if (j2.Vivo() && j1.nombre.trim().compareTo("Kecleon") == 0) {
-            j1.estado = "Normal";
+        } else {
+            j1.descansar = false;
         }
         j1.drenadoras = false;
         j1.mismodestino = false;
@@ -3654,12 +3657,16 @@ public class Pokemon {
 
             Juego.equipoIA[i].estado = "Normal";
             Juego.equipoIA[i].salud = Juego.equipoIA[i].saludmax;
-
             Juego.equipoIA[i].salud = Juego.equipoIA[i].saludmax;
             Juego.equipoIA[i].ataque = Juego.equipoIA[i].ataquebase;
             Juego.equipoIA[i].defensa = Juego.equipoIA[i].defensabase;
             Juego.equipoIA[i].ataqueesp = Juego.equipoIA[i].ataqueespbase;
             Juego.equipoIA[i].defensaesp = Juego.equipoIA[i].defensaespbase;
+            Juego.equipoIA[i].alalcance = true;
+            Juego.equipoIA[i].volando = false;
+            Juego.equipoIA[i].enterrado = false;
+            Juego.equipoIA[i].sumergido = false;
+            Juego.equipoIA[i].descansar = false;
 
             Juego.equipojugador[i].estado = "Normal";
             Juego.equipojugador[i].salud = Juego.equipojugador[i].saludmax;
@@ -3667,6 +3674,11 @@ public class Pokemon {
             Juego.equipojugador[i].defensa = Juego.equipojugador[i].defensabase;
             Juego.equipojugador[i].ataqueesp = Juego.equipojugador[i].ataqueespbase;
             Juego.equipojugador[i].defensaesp = Juego.equipojugador[i].defensaespbase;
+            Juego.equipojugador[i].alalcance = true;
+            Juego.equipojugador[i].volando = false;
+            Juego.equipojugador[i].enterrado = false;
+            Juego.equipojugador[i].sumergido = false;
+            Juego.equipojugador[i].descansar = false;
 
             PokemonGUI.botonpokemonelegidosJugador[i].setEnabled(true);
             if (n > 1) {

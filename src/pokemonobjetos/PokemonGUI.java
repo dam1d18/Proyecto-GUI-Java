@@ -2350,23 +2350,6 @@ public class PokemonGUI extends JFrame {
                                     labelnombrejugador.setText(Juego.equipojugador[j].nombre);
                                     if (cambiapokemonIAmuerto) {
                                         int l = pokemonencombateIA;
-                                        /*
-                                         * if
-                                         * (!equipoIA[pokemonencombateIA].Vivo())
-                                         * { do { l =
-                                         * Metodos.RandomSinRound(Juego.npokemonequipo);
-                                         * } while (!Juego.equipoIA[l].Vivo());
-                                         * int n =
-                                         * JOptionPane.showConfirmDialog(null,
-                                         * "El rival va a sacar a " +
-                                         * Juego.equipoIA[l].nombre + ".¿Deseas
-                                         * cambiar de Pokemon?", "",
-                                         * JOptionPane.YES_NO_OPTION); if (n ==
-                                         * 0) { for (int k = 0; k <
-                                         * botonataques.length; k++) {
-                                         * botonataques[k].setVisible(false); }
-                                         * botonatacar.setVisible(false); } }
-                                         */
                                         pokemonencombateIA = l;
                                         RefrescoVidaIA();
                                         if (!Juego.equipoIA[l].shiny) {

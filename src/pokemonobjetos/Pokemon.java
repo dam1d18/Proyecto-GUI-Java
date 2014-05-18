@@ -574,6 +574,7 @@ public class Pokemon {
                 turnossincurase--;
             }
         }
+        j1.prioridad = false;
         return str;
     }
 

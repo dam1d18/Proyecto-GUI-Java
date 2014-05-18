@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package pokemonobjetos;
-//Audio/Blink-182 - First Date.mp3
 
 import javazoom.jl.player.advanced.*;
 
@@ -44,7 +43,6 @@ class JLayerLoop extends PlaybackListener implements Runnable {
         this.playerThread.stop();
     }
 
-    // PlaybackListener members
     public void playbackStarted(PlaybackEvent playbackEvent) {
         System.out.println("playbackStarted()");
     }
@@ -55,7 +53,6 @@ class JLayerLoop extends PlaybackListener implements Runnable {
         }
     }
 
-    // Runnable members
     public void run() {
         try {
             this.player.play();

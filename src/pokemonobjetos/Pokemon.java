@@ -1893,7 +1893,7 @@ public class Pokemon {
                 str += j1.nombre.trim() + " golpeó " + i + " veces, infligiendo " + (int) golpe + " de daño con " + ataqueelegido.trim() + ".";
                 break;
             case "Superdiente":
-                golpe = j2.salud / 5;
+                golpe = j2.salud / 3;
                 System.out.println("Superdiente ha inflijido " + (int) golpe + " de daño.");
                 str += "Superdiente ha inflijido " + (int) golpe + " de daño.";
                 break;

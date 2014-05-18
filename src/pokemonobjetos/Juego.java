@@ -86,7 +86,6 @@ public class Juego {
         }
         Pokemon.Esquema();
         if (equipojugador[pokemonencombatejugador].Vivo() && equipoIA[pokemonencombateIA].Vivo()) {
-            //str = "";
             TransformacionDittoJugador();
             TransformacionDittoIA();
             equipojugador[pokemonencombatejugador].retroceder = false;
@@ -259,8 +258,6 @@ public class Juego {
                         } while (m != 0);
                     }
                 }
-                //PokemonGUI.bdpokemon.close();
-                //PokemonGUI.bdataque.close();
             }
         }
     }

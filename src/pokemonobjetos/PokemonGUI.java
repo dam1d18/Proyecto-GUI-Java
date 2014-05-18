@@ -154,7 +154,8 @@ public class PokemonGUI extends JFrame {
     }
 
     public void MenuElegirModoJuego() {
-        panelfondo.CargarImagen("1.png");
+        int n = (int) (Math.random() * 5) + 1;
+        panelfondo.CargarImagen(n + ".png");
         if (!volvermodojuego) {
             CrearEcualizador();
             sliderecualizador.setVisible(false);
@@ -3221,42 +3222,6 @@ public class PokemonGUI extends JFrame {
         volverhallfama = true;
     }
 
-    public void Centrar(Window frame) {
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x, y);
-    }
-
-    public static void IniciarDBOO() throws IOException {
-        ConectarPokemon("bdoo/pokemon.db4o");
-        ConectarAtaque("bdoo/ataque.db4o");
-        Lecturas.ContarNumeroPokemons();
-        Lecturas.ContarNumeroAtaques();
-        //Pokemon.BorrarTodo(bdpokemon);
-        //Lecturas.IntroducirDatosPokemon(bdpokemon);
-        //Pokemon.MostrarTodo(bdpokemon);
-        //Ataque.BorrarTodo(bdataque);
-        //Lecturas.IntroducirDatosAtaque(bdataque);
-        //Ataque.MostrarTodo(bdataque);
-    }
-
-    public static void CerrarDBOO() {
-        bdpokemon.close();
-        bdataque.close();
-    }
-
-    public static void main(String[] args) throws IOException {
-        IniciarDBOO();
-        MusicIntro = new JLayerLoop("Intro.mp3", true);
-        MusicIntro.play();
-
-        controladorsonido = new Ecualizador();
-        controladorsonido.setVolume(50);
-
-        pokemongui = new PokemonGUI();
-    }
-
     public static void RefrescoVidaJugador() {
         if (Juego.equipojugador[PokemonGUI.pokemonencombatejugador].salud == Juego.equipojugador[PokemonGUI.pokemonencombatejugador].saludmax) {
             PokemonGUI.saludjugador.setBackground(Color.green);
@@ -3837,5 +3802,41 @@ public class PokemonGUI extends JFrame {
         public void start() {
             new Thread(new BarraDeVidaIA()).start();
         }
+    }
+
+    public void Centrar(Window frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
+    }
+
+    public static void IniciarDBOO() throws IOException {
+        ConectarPokemon("bdoo/pokemon.db4o");
+        ConectarAtaque("bdoo/ataque.db4o");
+        Lecturas.ContarNumeroPokemons();
+        Lecturas.ContarNumeroAtaques();
+        //Pokemon.BorrarTodo(bdpokemon);
+        //Lecturas.IntroducirDatosPokemon(bdpokemon);
+        //Pokemon.MostrarTodo(bdpokemon);
+        //Ataque.BorrarTodo(bdataque);
+        //Lecturas.IntroducirDatosAtaque(bdataque);
+        //Ataque.MostrarTodo(bdataque);
+    }
+
+    public static void CerrarDBOO() {
+        bdpokemon.close();
+        bdataque.close();
+    }
+
+    public static void main(String[] args) throws IOException {
+        IniciarDBOO();
+        MusicIntro = new JLayerLoop("Intro.mp3", true);
+        MusicIntro.play();
+
+        controladorsonido = new Ecualizador();
+        controladorsonido.setVolume(50);
+
+        pokemongui = new PokemonGUI();
     }
 }

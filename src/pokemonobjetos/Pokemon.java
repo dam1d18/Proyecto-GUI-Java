@@ -3663,6 +3663,11 @@ public class Pokemon {
             Juego.equipoIA[i].ataqueesp = Juego.equipoIA[i].ataqueespbase;
             Juego.equipoIA[i].defensaesp = Juego.equipoIA[i].defensaespbase;
             Juego.equipoIA[i].velocidad = Juego.equipoIA[i].velocidadbase;
+            Juego.equipoIA[i].precision = 100;
+            Juego.equipoIA[i].evasion = 100;
+            Juego.equipoIA[i].turnossincurase = 0;
+            Juego.equipoIA[i].atrapado = 0;
+            Juego.equipoIA[i].retroceder = false;
             Juego.equipoIA[i].alalcance = true;
             Juego.equipoIA[i].volando = false;
             Juego.equipoIA[i].enterrado = false;
@@ -3676,6 +3681,11 @@ public class Pokemon {
             Juego.equipojugador[i].ataqueesp = Juego.equipojugador[i].ataqueespbase;
             Juego.equipojugador[i].defensaesp = Juego.equipojugador[i].defensaespbase;
             Juego.equipojugador[i].velocidad = Juego.equipojugador[i].velocidadbase;
+            Juego.equipojugador[i].precision = 100;
+            Juego.equipojugador[i].evasion = 100;
+            Juego.equipojugador[i].turnossincurase = 0;
+            Juego.equipojugador[i].atrapado = 0;
+            Juego.equipojugador[i].retroceder = false;
             Juego.equipojugador[i].alalcance = true;
             Juego.equipojugador[i].volando = false;
             Juego.equipojugador[i].enterrado = false;
@@ -3690,6 +3700,8 @@ public class Pokemon {
                 PokemonGUI.estadoequipojugador[i].setIcon(null);
             }
         }
+        Juego.veloSagradoJugador = 0;
+        Juego.veloSagradoIA = 0;
         if (n > 1) {
             PokemonGUI.labelfotoIA.setIcon(null);
             PokemonGUI.estadoIA.setIcon(null);

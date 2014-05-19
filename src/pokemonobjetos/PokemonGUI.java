@@ -563,36 +563,36 @@ public class PokemonGUI extends JFrame {
 
         if (!volverelegirgeneracion) {
             botonKanto = new JButton();
-            botonKanto.setBounds(260, 10, 270, 40);
+            botonKanto.setBounds(270, 160, 270, 40);
             botonKanto.setFocusable(false);
             botonKanto.setText("Kanto");
             add(botonKanto);
 
             botonJohto = new JButton();
-            botonJohto.setBounds(260, 60, 270, 40);
+            botonJohto.setBounds(270, 210, 270, 40);
             botonJohto.setFocusable(false);
             botonJohto.setText("Johto");
             add(botonJohto);
 
             botonHoenn = new JButton();
-            botonHoenn.setBounds(260, 110, 270, 40);
+            botonHoenn.setBounds(270, 260, 270, 40);
             botonHoenn.setFocusable(false);
             botonHoenn.setText("Hoenn");
             add(botonHoenn);
 
             botonSinnoh = new JButton();
-            botonSinnoh.setBounds(260, 160, 270, 40);
+            botonSinnoh.setBounds(270, 310, 270, 40);
             botonSinnoh.setFocusable(false);
             botonSinnoh.setText("Sinnoh");
             add(botonSinnoh);
 
             botonTeselia = new JButton();
-            botonTeselia.setBounds(260, 210, 270, 40);
+            botonTeselia.setBounds(270, 360, 270, 40);
             botonTeselia.setFocusable(false);
             botonTeselia.setText("Teselia");
             add(botonTeselia);
 
-            botonvolveratrasdesdegeneracion.setBounds(260, 260, 270, 40);
+            botonvolveratrasdesdegeneracion.setBounds(270, 410, 270, 40);
             botonvolveratrasdesdegeneracion.setText("Volver atrás");
             botonvolveratrasdesdegeneracion.setFocusable(false);
             add(botonvolveratrasdesdegeneracion);
@@ -803,6 +803,8 @@ public class PokemonGUI extends JFrame {
     }
 
     public void MenuTipoCombate() {
+        setSize(551, 300);
+        Centrar(this);
         panelfondo.CargarImagen("TipoCombate.png");
         botoncarrera.setVisible(false);
         botonhallfama.setVisible(false);
@@ -810,8 +812,6 @@ public class PokemonGUI extends JFrame {
         botonestadisticasmodolibre.setVisible(false);
         botoniniciarjuego.setVisible(false);
         botontablatipos.setVisible(false);
-        setSize(551, 300);
-        Centrar(this);
         if (!volvertipocombate) {
             label.setText("¿Qué tipo de combate desea?");
             label.setBounds(180, 30, 300, 20);
@@ -871,15 +871,15 @@ public class PokemonGUI extends JFrame {
     }
 
     public void ElegirPokemons() throws IOException {
+        setSize(1280, 850);
+        setResizable(false);
+        Centrar(this);
         panelfondo.CargarImagen("ElegirPokemon.png");
         MusicIntro.stop();
         MusicMenus = new JLayerLoop("Menus.mp3", true);
         MusicMenus.play();
         menuinicial = false;
         menuelegirpokemon = true;
-        setSize(1280, 850);
-        setResizable(false);
-        Centrar(this);
         if (modocarrera) {
             botonKanto.setVisible(false);
             botonJohto.setVisible(false);
@@ -2552,7 +2552,6 @@ public class PokemonGUI extends JFrame {
     }
 
     public void IniciarCombate() {
-        panelfondo.CargarImagen("Combate.png");
         iniciocombate = true;
         pokemonencombatejugador = 7;
         if (modocarrera) {
@@ -2671,6 +2670,7 @@ public class PokemonGUI extends JFrame {
         if (entrenadorliga == 1 && !Juego.repetircombate) {
             ListenersBotonAtaques();
         }
+        panelfondo.CargarImagen("Combate.png");
         DesarrolloCombate();
     }
 
@@ -3001,6 +3001,7 @@ public class PokemonGUI extends JFrame {
             MusicHallFama.play();
             setSize(1280, 860);
             Centrar(this);
+            panelfondo.CargarImagen("ElegirPokemon.png");
             if (!volverestadisticas) {
                 botonvolveratrasdesdeestadisticas.setBounds(10, 10, 270, 40);
                 botonvolveratrasdesdeestadisticas.setText("Volver atrás");
@@ -3131,6 +3132,7 @@ public class PokemonGUI extends JFrame {
         }
         setSize(ancho, alto);
         Centrar(this);
+        panelfondo.CargarImagen("ElegirPokemon.png");
         fotohallfama.setVisible(true);
         fotohallfama.setBounds(510, 5, 251, 121);
         String foto;

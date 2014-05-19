@@ -3662,6 +3662,7 @@ public class Pokemon {
             Juego.equipoIA[i].defensa = Juego.equipoIA[i].defensabase;
             Juego.equipoIA[i].ataqueesp = Juego.equipoIA[i].ataqueespbase;
             Juego.equipoIA[i].defensaesp = Juego.equipoIA[i].defensaespbase;
+            Juego.equipoIA[i].velocidad = Juego.equipoIA[i].velocidadbase;
             Juego.equipoIA[i].alalcance = true;
             Juego.equipoIA[i].volando = false;
             Juego.equipoIA[i].enterrado = false;
@@ -3674,6 +3675,7 @@ public class Pokemon {
             Juego.equipojugador[i].defensa = Juego.equipojugador[i].defensabase;
             Juego.equipojugador[i].ataqueesp = Juego.equipojugador[i].ataqueespbase;
             Juego.equipojugador[i].defensaesp = Juego.equipojugador[i].defensaespbase;
+            Juego.equipojugador[i].velocidad = Juego.equipojugador[i].velocidadbase;
             Juego.equipojugador[i].alalcance = true;
             Juego.equipojugador[i].volando = false;
             Juego.equipojugador[i].enterrado = false;

@@ -176,7 +176,10 @@ public class Ataque {
         return str;
     }
 
-    public static String Pasivas(Pokemon j1, Pokemon j2, Ataque ataq) {
+    /**
+     * Pasivas, sin completar, por tanto quedan desactivadas.
+     */
+    /*public static String Pasivas(Pokemon j1, Pokemon j2, Ataque ataq) {
         String str = "";
         switch (j1.codigo) {
             //Espesura
@@ -343,5 +346,5 @@ public class Ataque {
                 break;
         }
         return str;
-    }
+    }*/
 }

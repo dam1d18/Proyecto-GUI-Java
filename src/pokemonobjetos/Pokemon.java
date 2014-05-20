@@ -375,7 +375,8 @@ public class Pokemon {
                         } else {
                             golpe = ((j1.Golpe(ataq.nombre, antesgolpe, ataq.precision, ataq.critico, ataq.categoria, j1, j2) * 100) * (((Math.random() * 15) + 85) / 100)) / j2.defensaesp;
                         }
-                        str += Ataque.Pasivas(j1, j2, ataq);
+                        //Sin completar las pasivas, quedan descativadas.
+                        //str += Ataque.Pasivas(j1, j2, ataq); 
                         str += j1.IgnorarDefensas(j1, j2, ataq);
                         if (golpe < 0) {
                             System.out.println(j1.nombre.trim() + " ha fallado.");
